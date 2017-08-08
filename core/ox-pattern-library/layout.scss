@@ -1,0 +1,136 @@
+$normal-margin: 1.5rem;
+$tight-margin: 0.5rem;
+$content-max: 120rem;
+$text-content-max: 100rem;
+
+// Screen widths must be in px because @media queries assume 1rem = 16px
+$wide-screen-min: 1400px;
+$phone-max: 480px;
+$tablet-max: 960px;
+
+// Includes the given (min) width
+@mixin width-up-to($width) {
+    @media (max-width: $width) {
+        @content;
+    }
+}
+
+// Excludes the given (max) width
+@mixin wider-than($width) {
+    @media (min-width: $width + 1) {
+        @content;
+    }
+}
+
+// Includes the max width, excludes the min width
+@mixin width-between($width1, $width2) {
+    @media (min-width: $width1 + 1) and (max-width: $width2) {
+        @content;
+    }
+}
+
+// .basis-# defines a cell in the row
+// At phone size, all are 100% width
+// At tablet, .basis-2 thru .basis-6 are 50%, others still 100%
+// At desktop, .basis-n is n/12 of the row
+@mixin bases-with-margin($margin) {
+    @for $b from 2 through 10 {
+        .basis-#{$b} {
+            flex: 0 1 100%;
+
+            @if ($b < 7) {
+                @include wider-than($phone-max) {
+                    flex-basis: calc(50% - #{$margin});
+                }
+            }
+
+            @include wider-than($tablet-max) {
+                flex-basis: calc(#{100% * $b / 12} - #{2 * $margin});
+            }
+        }
+    }
+}
+
+// A container that centers content horizontally and vertically
+%center,
+.center {
+    align-items: center;
+    display: flex;
+    justify-content: center;
+    text-align: center;
+}
+
+// Page content is constrained to the middle of the screen
+.content {
+    margin-left: auto;
+    margin-right: auto;
+    max-width: calc(#{$content-max} - #{2 * $normal-margin});
+    padding-left: $normal-margin;
+    padding-right: $normal-margin;
+    width: calc(100% - #{2 * $normal-margin});
+
+    &.text,
+    .text {
+        max-width: calc(#{$text-content-max} - #{2 * $normal-margin});
+    }
+
+    // Grid System
+    .flexrow {
+        @include bases-with-margin($normal-margin);
+
+        align-items: center;
+        display: flex;
+        flex-flow: row wrap;
+        margin: 0 (-$normal-margin);
+
+        > * {
+            margin: 0.5rem $normal-margin;
+        }
+
+        > button,
+        > .btn {
+            // Trick to make the wrapped buttons have the correct left margin
+            margin: 0.5rem #{($tight-margin - $normal-margin) / 2} 0.5rem $normal-margin;
+
+            &:last-child {
+                margin-right: $normal-margin;
+            }
+        }
+    }
+
+    // In a form, flexrow spacing is different
+    form .flexrow,
+    .form .flexrow {
+        @include bases-with-margin($tight-margin);
+        margin: 0 (-$tight-margin);
+
+        > * {
+            margin: 2rem $tight-margin;
+            max-width: calc(100% - #{2 * $tight-margin});
+        }
+    }
+
+    // Lays out form element with field-label and error-message (each optional)
+    .control-group,
+    .control-group {
+        display: block;
+        height: 5rem;
+        margin: 2rem 0;
+        position: relative;
+        width: 100%;
+
+        .field-label,
+        .error-message {
+            position: absolute;
+            top: 0;
+            transform: translateY(-104%);
+            width: 100%;
+        }
+
+        .error-message {
+            bottom: 0;
+            transform: translateY(100%);
+        }
+    }
+
+}

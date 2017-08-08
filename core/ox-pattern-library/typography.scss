@@ -1,0 +1,21 @@
+$font-specs: (
+    hero-h1: 6rem 6rem true,
+    h1: 4.8rem 5rem true,
+    h2: 3.6rem 4rem true,
+    h3: 2.4rem 3rem true,
+    h4: 1.8rem 2.5rem true,
+    body-large: 1.8rem 3rem,
+    body-regular: 1.6rem 2.5rem,
+    helper-label: 1.4rem 2rem
+);
+
+// Create %text-hero-h1, etc placeholders
+@each $name, $spec in $font-specs {
+    %text-#{$name} {
+        font-size: nth($spec, 1);
+        line-height: nth($spec, 2);
+        @if (length($spec) > 2 and nth($spec, 3)) {
+            letter-spacing: -0.04 * nth($spec, 1);
+        }
+    }
+}

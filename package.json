@@ -1,0 +1,17 @@
+{
+    "name": "ox-pattern-library",
+    "version": "0.1.0",
+    "description": "SASS files implementing OpenStax pattern library conventions",
+    "main": "index.js",
+    "style": "core/ox-pattern-library.scss",
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/RoyEJohnson/ox-pattern-library.git"
+    },
+    "keywords": [
+        "sass",
+        "openstax"
+    ],
+    "author": "Roy Johnson <roy.e.johnson@rice.edu>",
+    "license": "MIT"
+}

@@ -1,0 +1,225 @@
+@import 'typography';
+@import 'colors';
+@import 'layout';
+
+html {
+    // This resets rem from 16px to 10px
+    font-size: 62.5%;
+}
+
+body {
+    @extend %text-body-regular;
+    background-color: ui-color(page-bg);
+    color: text-color(normal);
+    font-family: 'Neue Helvetica W01', sans-serif;
+    margin: 0;
+}
+
+h1,
+h2,
+h3,
+h4,
+p,
+.button-bar,
+form,
+.form,
+.set-off {
+    display: block;
+    margin: 0 0 1rem;
+}
+
+h1 {
+    @extend %text-h1;
+}
+
+.hero h1 {
+    @extend %text-hero-h1;
+}
+
+h2 {
+    @extend %text-h2;
+    margin-top: 2rem;
+}
+
+h3 {
+    @extend %text-h3;
+    margin-top: 1.5rem;
+}
+
+h4 {
+    @extend %text-h4;
+    margin-top: 1rem;
+}
+
+.copy-large {
+    @extend %text-body-large;
+}
+
+a {
+    color: text-color(link);
+    text-decoration: underline;
+
+    &:hover,
+    &:active {
+        color: text-color(link-hover);
+    }
+}
+
+@mixin button-behavior {
+    cursor: default;
+    user-select: none;
+}
+
+$form-border-width: 0.1rem;
+
+@mixin form-border {
+    border: $form-border-width solid ui-color(form-border);
+}
+
+button,
+.btn {
+    @extend %text-body-regular;
+    @include form-border;
+    @include button-behavior;
+    background-color: ui-color(default);
+    border-radius: 0.2rem;
+    color: text-color(normal);
+    font-weight: normal;
+    height: 5rem;
+    margin: $tight-margin;
+    padding: 0 3rem;
+
+    &:hover,
+    &:focus {
+        background-color: ui-color(default-hover);
+    }
+
+    &:active {
+        background-color: ui-color(default-active);
+    }
+
+    &.small {
+        @extend %text-helper-label;
+        height: 3rem;
+        padding: 0 2rem;
+    }
+
+    &.wide {
+        width: calc(100% - #{$tight-margin});
+    }
+
+    @each $ui-type in primary, secondary {
+        &.#{$ui-type} {
+            background-color: ui-color($ui-type);
+            border: 0;
+            color: text-color(white);
+            font-weight: bold;
+
+            &:hover,
+            &:focus {
+                background-color: ui-color(#{$ui-type}-hover);
+            }
+
+            &:active {
+                background-color: ui-color(#{$ui-type}-active);
+            }
+        }
+    }
+}
+
+form,
+.form {
+    background-color: ui-color(form-bg);
+    padding: 4rem;
+}
+
+label,
+.form-group {
+    @extend %text-helper-label;
+    color: text-color(helper);
+    width: 100%;
+
+    > * {
+        display: block;
+    }
+}
+
+input {
+    @extend %text-body-regular;
+    @include form-border;
+    background-color: ui-color(white);
+    color: text-color(normal);
+    height: 5rem;
+    padding: 0 $normal-margin;
+    width: calc(100% - #{2 * $normal-margin + 2 * $form-border-width});
+
+    &:focus {
+        border: thin solid os-color(light-blue);
+        box-shadow: 0 0 4px 0 rgba(os-color(light-blue), 0.5);
+        outline: none;
+    }
+
+    &::placeholder {
+        color: text-color(helper);
+    }
+
+    &:invalid {
+        background-color: ui-color(error-bg);
+        border: thin solid ui-color(error-border);
+        color: ui-color(error-fg);
+
+        ~ .error-message {
+            @extend %text-helper-label;
+            color: ui-color(error-fg);
+            display: block;
+        }
+    }
+
+    ~ .error-message {
+        display: none;
+    }
+}
+
+.button-bar {
+    @include form-border;
+    align-items: baseline;
+    border-radius: 0.2rem;
+    display: flex;
+    height: 5rem;
+    padding: 0;
+
+    > * {
+        @extend %center;
+        @include button-behavior;
+
+        background-color: ui-color(white);
+        border: 0;
+        border-radius: 0;
+        color: text-color(button-bar);
+        height: 100%;
+        margin: 0;
+        padding: 0 3rem;
+
+        &:focus {
+            z-index: 1;
+        }
+
+        &:not(:last-child) {
+            border-right: thin solid ui-color(form-border);
+        }
+
+        &:hover {
+            background-color: ui-color(form-bg);
+        }
+
+        &[aria-selected="true"] {
+            background-color: ui-color(default-hover);
+            color: text-color(normal);
+        }
+    }
+
+    > button {
+        // Compensate for anomaly: buttons get drawn 1px lower
+        transform: translateY(-0.1rem);
+    }
+}
