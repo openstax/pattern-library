@@ -1,0 +1,7 @@
+#!/bin/bash
+npm run kss
+mkdir -p styleguide/core
+sass core/ox-pattern-library.scss styleguide/core/ox-pattern-library.css
+cat <<.
+Now load styleguide/index.html in your browser
+.

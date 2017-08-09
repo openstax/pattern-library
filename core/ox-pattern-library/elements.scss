@@ -15,6 +15,23 @@ body {
     margin: 0;
 }
 
+// Headings
+//
+// Each heading size has a placeholder selector, so you can use
+// <code>
+// @extend %text-h1;
+// </code>
+// to apply h1-style font to some other element type.
+//
+// Markup:
+// <div class="hero"><h1>H1 in a hero (%text-hero-h1)</h1></div>
+// <h1>H1 heading (%text-h1)</h1>
+// <h2>H2 heading (%text-h2)</h2>
+// <h3>H3 heading (%text-h3)</h3>
+// <h4>H4 heading (%text-h4)</h4>
+//
+// Styleguide: Typography.Headings
+
 h1,
 h2,
 h3,
@@ -51,9 +68,27 @@ h4 {
     margin-top: 1rem;
 }
 
+// Copy
+//
+// Markup:
+// <div class="{{modifier_class}}">This is some copy</div>
+//
+// .copy-large - larger copy
+//
+// Styleguide: Typography.Copy
+
 .copy-large {
     @extend %text-body-large;
 }
+
+// Links
+//
+// Text shades slightly in `:hover` and `:active` states.
+//
+// Markup:
+// <a href="#">Link text</a>
+//
+// Styleguide: Typography.Links
 
 a {
     color: text-color(link);
@@ -66,7 +101,9 @@ a {
 }
 
 @mixin button-behavior {
+    @extend %center;
     cursor: default;
+    display: inline-flex;
     user-select: none;
 }
 
@@ -76,11 +113,31 @@ $form-border-width: 0.1rem;
     border: $form-border-width solid ui-color(form-border);
 }
 
+// Buttons
+//
+// Subtle color changes on hover, focus, and active states
+//
+// Markup:
+// <button class="{{modifier_class}}">Native button</button>
+// <input type="button" class="{{modifier_class}}" value="input[type='button']"/>
+// <div class="btn {{modifier_class}}">Anything styled like a button</div>
+//
+// .small - Not as tall
+// .wide - The width of the enclosing container
+// .primary - Colored to stand out
+// .secondary - Colored to stand out a bit less than primary
+//
+// Styleguide: Form Elements.Buttons
+
+.btn {
+    @include button-behavior;
+}
+
 button,
+[type="button"],
 .btn {
     @extend %text-body-regular;
     @include form-border;
-    @include button-behavior;
     background-color: ui-color(default);
     border-radius: 0.2rem;
     color: text-color(normal);
@@ -105,6 +162,7 @@ button,
     }
 
     &.wide {
+        padding: 0;
         width: calc(100% - #{$tight-margin});
     }
 
@@ -127,14 +185,23 @@ button,
     }
 }
 
+// Form
+//
+// Forms get a slightly different background color and a healthy bit of padding to
+// set them off from other containers.
+//
+// Markup:
+// <form>A form container</form>
+// <div class="form">A container styled the same</div>
+//
+// Styleguide: Form Elements.Form
 form,
 .form {
     background-color: ui-color(form-bg);
     padding: 4rem;
 }
 
-label,
-.form-group {
+label {
     @extend %text-helper-label;
     color: text-color(helper);
     width: 100%;
@@ -144,7 +211,7 @@ label,
     }
 }
 
-input {
+input:not([type="button"]) {
     @extend %text-body-regular;
     @include form-border;
     background-color: ui-color(white);
@@ -180,18 +247,27 @@ input {
     }
 }
 
+// Button Bar
+//
+// Markup:
+// <div class="button-bar">
+//     <button>Option 1</button>
+//     <button aria-selected="true">Option 2</button>
+//     <div class="btn">Option 3</div>
+//     <input type="button" value="Option 4">
+// </div>
+//
+// Styleguide: Form Elements.Button Bar
+
 .button-bar {
     @include form-border;
     align-items: baseline;
     border-radius: 0.2rem;
-    display: flex;
+    display: inline-flex;
     height: 5rem;
     padding: 0;
 
     > * {
-        @extend %center;
-        @include button-behavior;
-
         background-color: ui-color(white);
         border: 0;
         border-radius: 0;
@@ -218,8 +294,8 @@ input {
         }
     }
 
-    > button {
-        // Compensate for anomaly: buttons get drawn 1px lower
+    > :not(button):not(input) {
+        // Compensate for anomaly in how buttons vs non-buttons are rendered
         transform: translateY(-0.1rem);
     }
 }
