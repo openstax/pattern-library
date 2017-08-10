@@ -17,27 +17,23 @@ body {
 
 // Headings
 //
-// Each heading size has a placeholder selector, so you can use
+// Each heading size has a placeholder selector, so you can use, e.g.,
 // <code>
 // @extend %text-h1;
 // </code>
 // to apply h1-style font to some other element type.
 //
 // Markup:
-// <div class="hero"><h1>H1 in a hero (%text-hero-h1)</h1></div>
-// <h1>H1 heading (%text-h1)</h1>
-// <h2>H2 heading (%text-h2)</h2>
-// <h3>H3 heading (%text-h3)</h3>
-// <h4>H4 heading (%text-h4)</h4>
-// <hr>
-// <div class="tutor">
-//     <div>Wrapped in a <code>.tutor</code>, these become:</div>
-//     <div class="hero"><h1>Hero h1 heading</h1></div>
+// <div class="{{modifier_class}}">
+//     <div class="hero"><h1>H1 in a hero (%text-hero-h1)</h1></div>
 //     <h1>H1 heading (%text-h1)</h1>
 //     <h2>H2 heading (%text-h2)</h2>
 //     <h3>H3 heading (%text-h3)</h3>
 //     <h4>H4 heading (%text-h4)</h4>
 // </div>
+//
+// .tutor - if enclosed in a `.tutor`, uses OpenStax Tutor typography. Recommend
+// putting this class on the `body` element.
 //
 // Styleguide: Typography.Headings
 
@@ -46,10 +42,9 @@ h2,
 h3,
 h4,
 p,
-.button-bar,
 form,
 .form,
-.set-off {
+%block-item {
     display: block;
     margin: 0 0 1rem;
 }
