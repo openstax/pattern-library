@@ -1,6 +1,4 @@
-@import 'typography';
-@import 'colors';
-@import 'layout';
+@import 'headers';
 
 html {
     // This resets rem from 16px to 10px
@@ -13,6 +11,221 @@ body {
     color: text-color(normal);
     font-family: 'Neue Helvetica W01', sans-serif;
     margin: 0;
+}
+
+// Content
+//
+// Apart from decorative elements, all content should be in a `.content` container,
+// which constrains it to the middle column of the screen on wide screens. `.content`
+// also includes padding to make "gutters" in a region, so that its content will not
+// be flush against the edge, and you may apply `.content` at multiple levels to get
+// the gutters.<br>
+// The examples below have a blue-background `.content` block.
+//
+// Markup:
+// <div class="content">
+//     <div class="content {{modifier_class}} bg-blue">
+//         <p>
+//              Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
+//              incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis
+//              nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+//              Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu
+//              fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in
+//              culpa qui officia deserunt mollit anim id est laborum.
+//          </p>
+//          <p>
+//               Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
+//               incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis
+//               nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+//               Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu
+//               fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in
+//               culpa qui officia deserunt mollit anim id est laborum.
+//           </p>
+//     </div>
+// </div>
+//
+// .text - Narrows the block to the maximum width allowed for single-column text.
+// The class can be applied to the `.content` block or inside it. It is applied to the
+// blue `.content` block here. As you can see from the above example, paragraphs (`<p>`)
+// are always constrained to the single-column text maximum width.
+//
+// Styleguide: Layout.Content
+
+// Page content is constrained to the middle of the screen
+.content {
+    margin-left: auto;
+    margin-right: auto;
+    max-width: calc(#{$content-max} - #{2 * $normal-margin});
+    padding-left: $normal-margin;
+    padding-right: $normal-margin;
+    width: calc(100% - #{2 * $normal-margin});
+
+    &.text,
+    .text,
+    p {
+        margin-left: auto;
+        margin-right: auto;
+        max-width: calc(#{$text-content-max} - #{2 * $normal-margin});
+    }
+
+    // FlexRow
+    //
+    // Multiple items in a `.flexrow` are laid out based on a 12-column grid. Each item
+    // is given a class `.basis-`*n*, where *n* can be from 2 to 10. The FlexRow takes
+    // care of sizing and wrapping appropriately on narrower screens.
+    //
+    // Markup:
+    // <div class="content">
+    //     <div class="flexrow">
+    //         <div class="basis-2 bg-blue">Basis 2</div>
+    //         <div class="basis-10 bg-gold">Basis 10</div>
+    //     </div>
+    //     <div class="flexrow">
+    //         <div class="basis-2 bg-deep-green">Basis 2<br>extra-tall</div>
+    //         <div class="basis-3 bg-gray">Basis 3</div>
+    //         <div class="basis-4 bg-green">Basis 4</div>
+    //         <div class="basis-3 bg-red">Basis 3</div>
+    //     </div>
+    //     <div class="flexrow">
+    //         <div class="basis-7 bg-light-blue">Basis 7</div>
+    //         <div class="basis-5 bg-light-gray">Basis 5</div>
+    //     </div>
+    //     <div class="flexrow">
+    //         <div class="basis-4 bg-medium-blue">Basis 4</div>
+    //         <div class="basis-8 bg-orange">Basis 8</div>
+    //     </div>
+    //     <div class="flexrow">
+    //         <div class="bg-yellow">
+    //             <div class="text bg-gold">
+    //                 This is a <code>div.text</code> inside an ordinary div (no
+    //                 <code>basis</code>) inside a <code>div.flexrow</code>.
+    //             </div>
+    //         </div>
+    //     </div>
+    //     <div class="flexrow">
+    //         <button>Buttons</button>
+    //         <button>in a</button>
+    //         <button>flexrow</button>
+    //         <button>are spaced</button>
+    //         <button>more</button>
+    //         <button>narrowly</button>
+    //     </div>
+    // </div>
+    //
+    // Styleguide: Layout.FlexRow
+
+    // Grid System
+    .flexrow {
+        @include bases-with-margin($normal-margin);
+
+        align-items: center;
+        display: flex;
+        flex-flow: row wrap;
+        margin: 0 (-$normal-margin);
+
+        > * {
+            margin: 0.5rem $normal-margin;
+            width: 100%;
+        }
+
+        > button,
+        > .btn {
+            // Trick to make the wrapped buttons have the correct left margin
+            margin: 0.5rem #{($tight-margin - $normal-margin) / 2} 0.5rem $normal-margin;
+            width: auto;
+
+            &:last-child {
+                margin-right: $normal-margin;
+            }
+        }
+    }
+
+    // Form FlexRow
+    //
+    // In forms, flexrows are spaced further apart, while their contents are closer
+    // together.
+    //
+    // Markup:
+    // <div class="content">
+    //     <form>
+    //         <div class="flexrow">
+    //             <div class="control-group basis-6">
+    //                 <label class="field-label">Field Label</label>
+    //                 <input placeholder="In a form, flexrow spacing is tighter">
+    //             </div>
+    //             <div class="control-group basis-6">
+    //                 <label class="field-label">Field Label</label>
+    //                 <input placeholder="In a form, flexrow spacing is tighter" pattern="g" required>
+    //                 <div class="error-message">Message is placed absolutely</div>
+    //             </div>
+    //         </div>
+    //         <div class="flexrow">
+    //             <div class="basis-4"><button class="wide">That is why</button></div>
+    //             <div class="basis-4"><button class="wide">Buttons</button></div>
+    //             <div class="basis-4"><button class="wide">Are close-spaced</button></div>
+    //         </div>
+    //         <div class="flexrow">
+    //             <div class="basis-4 bg-blue">Some text</div>
+    //             <div class="basis-4 bg-gray">Some text</div>
+    //             <div class="basis-4 bg-gold">Some text</div>
+    //         </div>
+    //     </form>
+    // </div>
+    //
+    // Styleguide: Layout.FlexRow.Form
+
+    // In a form, flexrow spacing is different
+    form .flexrow,
+    .form .flexrow {
+        @include bases-with-margin($tight-margin);
+        margin: 0 (-$tight-margin);
+
+        > * {
+            margin: 2rem $tight-margin;
+            max-width: calc(100% - #{2 * $tight-margin});
+        }
+    }
+
+    // Control Group
+    //
+    // Optional containers `.field-label` and `.error-message`<br>
+    // `.field-label` *must not* enclose the input element, so if you are wrapping
+    // the input element in a `label`, put the text in a `span.field-label`.
+    //
+    // Markup:
+    // <form>
+    //     <div class="control-group">
+    //         <label class="field-label">Field Label</label>
+    //         <input placeholder="Placeholder text" pattern="g" required>
+    //         <div class="error-message">Enter a g</div>
+    //     </div>
+    // </form>
+    //
+    // Styleguide: Form Elements.Control Group
+
+    // Lays out form element with field-label and error-message (each optional)
+    .control-group,
+    .control-group {
+        display: block;
+        height: 5rem;
+        margin: 2rem 0;
+        position: relative;
+        width: 100%;
+
+        .field-label,
+        .error-message {
+            position: absolute;
+            top: 0;
+            transform: translateY(-104%);
+            width: 100%;
+        }
+
+        .error-message {
+            bottom: 0;
+            transform: translateY(100%);
+        }
+    }
+
 }
 
 // Headings
