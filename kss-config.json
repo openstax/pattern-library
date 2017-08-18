@@ -1,8 +1,8 @@
 {
     "title": "OpenStax Pattern Library Style Guide",
-    "source": "core/ox-pattern-library",
+    "source": "core/pattern-library",
     "destination": "styleguide/",
     "css": [
-        "core/ox-pattern-library.css"
+        "core/pattern-library.css"
     ]
 }
