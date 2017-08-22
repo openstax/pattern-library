@@ -18,12 +18,11 @@ body {
 // Apart from decorative elements, all content should be in a `.content` container,
 // which constrains it to the middle column of the screen on wide screens. `.content`
 // also includes padding to make "gutters" in a region, so that its content will not
-// be flush against the edge, and you may apply `.content` at multiple levels to get
-// the gutters.<br>
+// be flush against the edge. Multiple layers of `.content` do not add multiple layers
+// of gutters.<br>
 // The examples below have a blue-background `.content` block.
 //
 // Markup:
-// <div class="content">
 //     <div class="content {{modifier_class}} bg-blue">
 //         <p>
 //              Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
@@ -42,7 +41,6 @@ body {
 //               culpa qui officia deserunt mollit anim id est laborum.
 //           </p>
 //     </div>
-// </div>
 //
 // .text - Narrows the block to the maximum width allowed for single-column text.
 // The class can be applied to the `.content` block or inside it. It is applied to the
@@ -53,19 +51,12 @@ body {
 
 // Page content is constrained to the middle of the screen
 .content {
-    margin-left: auto;
-    margin-right: auto;
-    max-width: calc(#{$content-max} - #{2 * $normal-margin});
-    padding-left: $normal-margin;
-    padding-right: $normal-margin;
-    width: calc(100% - #{2 * $normal-margin});
+    @extend %content;
 
     &.text,
     .text,
     p {
-        margin-left: auto;
-        margin-right: auto;
-        max-width: calc(#{$text-content-max} - #{2 * $normal-margin});
+        @extend %text-content;
     }
 
     // FlexRow
@@ -256,10 +247,8 @@ h3,
 h4,
 p,
 form,
-.form,
-%block-item {
-    display: block;
-    margin: 0 0 1rem;
+.form {
+    @extend %block-item;
 }
 
 h1 {
