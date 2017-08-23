@@ -1,6 +1,6 @@
 {
   "name": "pattern-library",
-  "version": "0.3.6b",
+  "version": "0.3.6c",
   "description": "SASS files implementing OpenStax pattern library conventions",
   "main": "index.js",
   "style": "core/pattern-library.scss",

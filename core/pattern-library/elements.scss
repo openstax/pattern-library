@@ -202,7 +202,7 @@ body {
     .control-group {
         display: block;
         height: $form-element-height;
-        margin: 2rem 0;
+        margin: 0;
         position: relative;
         width: 100%;
 
@@ -440,7 +440,7 @@ textarea {
     background-color: ui-color(white);
     color: text-color(normal);
     padding: 0 $normal-margin;
-    width: calc(100% - #{2 * $normal-margin + 2 * $form-border-width});
+    width: 100%;
 
     &:focus {
         border: thin solid os-color(light-blue);
@@ -466,6 +466,7 @@ textarea {
 
     ~ .invalid-message {
         display: none;
+        pointer-events: none;
     }
 }
 
