@@ -170,14 +170,18 @@ body {
     // Styleguide: Layout.FlexRow.Form
 
     // In a form, flexrow spacing is different
-    form .flexrow,
-    .form .flexrow {
-        @include bases-with-margin($tight-margin);
-        margin: 0 (-$tight-margin);
+    &form,
+    &.form,
+    form,
+    .form {
+        .flexrow {
+            @include bases-with-margin($tight-margin);
+            margin: 0 (-$tight-margin);
 
-        > * {
-            margin: 2rem $tight-margin;
-            max-width: calc(100% - #{2 * $tight-margin});
+            > * {
+                margin: 2rem $tight-margin;
+                max-width: calc(100% - #{2 * $tight-margin});
+            }
         }
     }
 
