@@ -401,14 +401,17 @@ button,
 // Form
 //
 // Forms get a slightly different background color and a healthy bit of padding to
-// set them off from other containers.
+// set them off from other containers. These stylings only apply to `<form>` tags
+// that are inside `.content` or themselves have the `.content` class; use the
+// `.form` class to apply to anything else.
 //
 // Markup:
-// <form>A form container</form>
+// <form class="content">A form container</form>
 // <div class="form">A container styled the same</div>
 //
 // Styleguide: Form Elements.Form
-form,
+%content form,
+form%content,
 .form {
     background-color: ui-color(form-bg);
     padding: 4rem;
@@ -424,7 +427,7 @@ label {
     }
 }
 
-input:not([type="button"],[type="submit"]) {
+input:not([type="button"]):not([type="submit"]) {
     @extend %text-body-regular;
     @include form-border;
     background-color: ui-color(white);
@@ -462,6 +465,8 @@ input:not([type="button"],[type="submit"]) {
 
 // Button Bar
 //
+// A row of buttons or button-styled elements used like a radio group
+//
 // Markup:
 // <div class="button-bar">
 //     <button>Option 1</button>
@@ -488,6 +493,7 @@ input:not([type="button"],[type="submit"]) {
         height: 100%;
         margin: 0;
         padding: 0 3rem;
+        white-space: nowrap;
 
         &:focus {
             z-index: 1;
