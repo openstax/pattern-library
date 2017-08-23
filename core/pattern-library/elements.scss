@@ -148,7 +148,7 @@ body {
     //             <div class="control-group basis-6">
     //                 <label class="field-label">Field Label</label>
     //                 <input placeholder="In a form, flexrow spacing is tighter" pattern="g" required>
-    //                 <div class="error-message">Message is placed absolutely</div>
+    //                 <div class="invalid-message">Message is placed absolutely</div>
     //             </div>
     //         </div>
     //         <div class="flexrow">
@@ -180,7 +180,7 @@ body {
 
     // Control Group
     //
-    // Optional containers `.field-label` and `.error-message`<br>
+    // Optional containers `.field-label` and `.invalid-message`<br>
     // `.field-label` *must not* enclose the input element, so if you are wrapping
     // the input element in a `label`, put the text in a `span.field-label`.
     //
@@ -189,13 +189,13 @@ body {
     //     <div class="control-group">
     //         <label class="field-label">Field Label</label>
     //         <input placeholder="Placeholder text" pattern="g" required>
-    //         <div class="error-message">Enter a g</div>
+    //         <div class="invalid-message">Enter a g</div>
     //     </div>
     // </form>
     //
     // Styleguide: Form Elements.Control Group
 
-    // Lays out form element with field-label and error-message (each optional)
+    // Lays out form element with field-label and invalid-message (each optional)
     .control-group,
     .control-group {
         display: block;
@@ -205,14 +205,16 @@ body {
         width: 100%;
 
         .field-label,
-        .error-message {
+        .invalid-message,
+        .invalid-message {
             position: absolute;
             top: 0;
             transform: translateY(-104%);
             width: 100%;
         }
 
-        .error-message {
+        .invalid-message,
+        .invalid-message {
             bottom: 0;
             transform: translateY(100%);
         }
@@ -446,14 +448,14 @@ input:not([type="button"],[type="submit"]) {
         border: thin solid ui-color(error-border);
         color: ui-color(error-fg);
 
-        ~ .error-message {
+        ~ .invalid-message {
             @extend %text-helper-label;
             color: ui-color(error-fg);
             display: block;
         }
     }
 
-    ~ .error-message {
+    ~ .invalid-message {
         display: none;
     }
 }
