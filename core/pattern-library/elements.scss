@@ -161,6 +161,9 @@ body {
     //             <div class="basis-4 bg-gray">Some text</div>
     //             <div class="basis-4 bg-gold">Some text</div>
     //         </div>
+    //         <div class="flexrow">
+    //             <textarea rows="4">Here is a textarea</textarea>
+    //         </div>
     //     </form>
     // </div>
     //
@@ -196,11 +199,10 @@ body {
     // Styleguide: Form Elements.Control Group
 
     // Lays out form element with field-label and invalid-message (each optional)
-    .control-group,
     .control-group {
         display: block;
         height: $form-element-height;
-        margin: 2rem 0;
+        margin: 4rem 0;
         position: relative;
         width: 100%;
 
@@ -427,12 +429,16 @@ label {
     }
 }
 
-input:not([type="button"]):not([type="submit"]) {
+input {
+    height: $form-element-height;
+}
+
+input:not([type="button"]):not([type="submit"]),
+textarea {
     @extend %text-body-regular;
     @include form-border;
     background-color: ui-color(white);
     color: text-color(normal);
-    height: $form-element-height;
     padding: 0 $normal-margin;
     width: calc(100% - #{2 * $normal-margin + 2 * $form-border-width});
 
