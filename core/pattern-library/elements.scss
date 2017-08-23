@@ -7,6 +7,7 @@ html {
 
 body {
     @extend %text-body-regular;
+
     background-color: ui-color(page-bg);
     color: text-color(normal);
     font-family: 'Neue Helvetica W01', sans-serif;
@@ -198,7 +199,7 @@ body {
     .control-group,
     .control-group {
         display: block;
-        height: 5rem;
+        height: $form-element-height;
         margin: 2rem 0;
         position: relative;
         width: 100%;
@@ -304,6 +305,10 @@ a {
     &:active {
         color: text-color(link-hover);
     }
+
+    &.btn {
+        text-decoration: none;
+    }
 }
 
 @mixin button-behavior {
@@ -348,7 +353,7 @@ button,
     border-radius: 0.2rem;
     color: text-color(normal);
     font-weight: normal;
-    height: 5rem;
+    height: $form-element-height;
     margin: $tight-margin;
     padding: 0 3rem;
 
@@ -417,12 +422,12 @@ label {
     }
 }
 
-input:not([type="button"]) {
+input:not([type="button"],[type="submit"]) {
     @extend %text-body-regular;
     @include form-border;
     background-color: ui-color(white);
     color: text-color(normal);
-    height: 5rem;
+    height: $form-element-height;
     padding: 0 $normal-margin;
     width: calc(100% - #{2 * $normal-margin + 2 * $form-border-width});
 
@@ -470,7 +475,7 @@ input:not([type="button"]) {
     align-items: baseline;
     border-radius: 0.2rem;
     display: inline-flex;
-    height: 5rem;
+    height: $form-element-height;
     padding: 0;
 
     > * {

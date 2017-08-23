@@ -2,6 +2,7 @@ $normal-margin: 1.5rem;
 $tight-margin: 0.5rem;
 $content-max: 120rem;
 $text-content-max: 80rem;
+$form-element-height: 5rem;
 
 // Screen widths must be in px because @media queries assume 1rem = 16px
 $wide-screen-min: 1400px;
@@ -66,7 +67,7 @@ $tablet-max: 960px;
     margin-left: auto;
     margin-right: auto;
     max-width: calc(#{$content-max} - #{2 * $normal-margin});
-    width: 100%;
+    width: calc(100% - #{2 * $normal-margin});
     padding-left: $normal-margin;
     padding-right: $normal-margin;
 }
@@ -82,9 +83,6 @@ $tablet-max: 960px;
     padding-left: 0;
     padding-right: 0;
 }
-
-
-
 
 // A container that centers content horizontally and vertically
 %center {
