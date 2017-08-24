@@ -2,6 +2,17 @@
 @import 'elements/document';
 @import 'elements/headings';
 
+@each $name, $spec in $os-colors {
+    #{".bg-" + $name} {
+        background-color: $spec;
+        @if index(light-blue gold yellow, $name) {
+            color: text-color(normal);
+        } @else {
+            color: text-color(white);
+        }
+    }
+}
+
 // Content
 //
 // Apart from decorative elements, all content should be in a `.content` container,

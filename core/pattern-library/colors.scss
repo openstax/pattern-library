@@ -62,14 +62,3 @@ $ui-colors: (
 @function ui-color($color) {
     @return get-color($ui-colors, $color);
 }
-
-@each $name, $spec in $os-colors {
-    #{".bg-" + $name} {
-        background-color: $spec;
-        @if index(light-blue gold yellow, $name) {
-            color: text-color(normal);
-        } @else {
-            color: text-color(white);
-        }
-    }
-}
