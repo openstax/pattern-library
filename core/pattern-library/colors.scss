@@ -13,34 +13,34 @@ $os-colors: (
 );
 
 $text-colors: (
+    button-bar: #5e6062,
+    error: #c22032,
+    footer-header: #9a9a9b,
+    footer: #d5d5d5,
     helper: #6f6f6f,
     link-hover: #0064a0,
     link: #027eb5,
     normal: #424242,
-    white: #fff,
-    footer-header: #9a9a9b,
-    footer: #d5d5d5,
-    button-bar: #5e6062
+    white: #fff
 );
 
 $ui-colors: (
-    page-bg: #f1f1f1,
+    default-active: #dbdbdb,
+    default-hover: #e5e5e5,
+    default: #f1f1f1,
+    error-bg: #f8e8ea,
+    error-border: #e298a0,
+    footer-bg: #424242
     form-bg: #f5f5f5,
     form-border: #d5d5d5,
-    error-fg: #c22032,
-    error-border: #e298a0,
-    error-bg: #f8e8ea,
-    primary: map-get($os-colors, orange),
-    primary-hover: #e96128,
+    page-bg: #f1f1f1,
     primary-active: #df571e,
-    secondary: map-get($os-colors, light-gray),
-    secondary-hover: #8b8b8b,
+    primary-hover: #e96128,
+    primary: map-get($os-colors, orange),
     secondary-active: #818181,
-    default: #f1f1f1,
-    default-hover: #e5e5e5,
-    default-active: #dbdbdb,
+    secondary-hover: #8b8b8b,
+    secondary: map-get($os-colors, light-gray),
     white: #fff,
-    footer-bg: #424242
 );
 
 @function get-color($map, $key) {

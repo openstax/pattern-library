@@ -459,11 +459,11 @@ textarea {
     &:invalid {
         background-color: ui-color(error-bg);
         border: thin solid ui-color(error-border);
-        color: ui-color(error-fg);
+        color: text-color(error);
 
         ~ .invalid-message {
             @extend %text-helper-label;
-            color: ui-color(error-fg);
+            color: text-color(error);
             display: block;
         }
     }
