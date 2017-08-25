@@ -58,7 +58,7 @@ $form-border-width: 0.1rem;
     }
 }
 
-%button-bar {
+@mixin button-bar() {
     @include form-border;
     align-items: baseline;
     border-radius: 0.2rem;
@@ -89,14 +89,23 @@ $form-border-width: 0.1rem;
         }
     }
 
-    > %selected {
-        background-color: ui-color(default-hover);
-        color: text-color(normal);
-    }
-
     > :not(button):not(input) {
         // Compensate for anomaly in how buttons vs non-buttons are rendered
         transform: translateY(-0.1rem);
+    }
+}
+
+@mixin button-bar-selected() {
+    background-color: ui-color(default-hover);
+    color: text-color(normal);
+}
+
+%button-bar {
+
+    @include button-bar();
+
+    > %selected {
+        @include button-bar-selected();
     }
 }
 
