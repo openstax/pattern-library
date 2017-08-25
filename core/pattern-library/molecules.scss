@@ -67,12 +67,15 @@ $form-border-width: 0.1rem;
     padding: 0;
 
     > * {
+        align-items: center;
         background-color: ui-color(white);
-        border: 0;
         border-radius: 0;
+        border: 0;
         color: text-color(button-bar);
+        display: flex;
         height: 100%;
         margin: 0;
+        max-height: 100%;
         padding: 0 3rem;
         white-space: nowrap;
 
@@ -89,10 +92,6 @@ $form-border-width: 0.1rem;
         }
     }
 
-    > :not(button):not(input) {
-        // Compensate for anomaly in how buttons vs non-buttons are rendered
-        transform: translateY(-0.1rem);
-    }
 }
 
 @mixin button-bar-selected() {
