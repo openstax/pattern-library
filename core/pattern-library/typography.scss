@@ -33,7 +33,7 @@ $tutor-font-specs: (
 
 // Create .tutor placeholders
 @each $name, $spec in $tutor-font-specs {
-    .tutor %text-#{$name} {
+    %tutor %text-#{$name} {
         font-size: nth($spec, 1);
         font-weight: bold;
         line-height: nth($spec, 2);
@@ -41,7 +41,7 @@ $tutor-font-specs: (
     }
 }
 
-.tutor %text-h3 {
+%tutor %text-h3 {
     font-weight: normal;
     letter-spacing: 0;
     text-transform: uppercase;

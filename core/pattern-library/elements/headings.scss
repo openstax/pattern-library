@@ -44,3 +44,7 @@ h4 {
     @extend %text-h4;
     margin-top: 1rem;
 }
+
+.tutor {
+    @extend %tutor;
+}

@@ -57,3 +57,66 @@ $form-border-width: 0.1rem;
         }
     }
 }
+
+%button-bar {
+    @include form-border;
+    align-items: baseline;
+    border-radius: 0.2rem;
+    display: inline-flex;
+    height: $form-element-height;
+    padding: 0;
+
+    > * {
+        background-color: ui-color(white);
+        border: 0;
+        border-radius: 0;
+        color: text-color(button-bar);
+        height: 100%;
+        margin: 0;
+        padding: 0 3rem;
+        white-space: nowrap;
+
+        &:focus {
+            z-index: 1;
+        }
+
+        &:not(:last-child) {
+            border-right: thin solid ui-color(form-border);
+        }
+
+        &:hover {
+            background-color: ui-color(form-bg);
+        }
+    }
+
+    > %selected {
+        background-color: ui-color(default-hover);
+        color: text-color(normal);
+    }
+
+    > :not(button):not(input) {
+        // Compensate for anomaly in how buttons vs non-buttons are rendered
+        transform: translateY(-0.1rem);
+    }
+}
+
+%control-group {
+    display: block;
+    height: $form-element-height;
+    margin: 0;
+    position: relative;
+    width: 100%;
+
+    %field-label,
+    %invalid-message {
+        position: absolute;
+        top: 0;
+        transform: translateY(-104%);
+        width: 100%;
+    }
+
+    %invalid-message {
+        bottom: 0;
+        transform: translateY(100%);
+    }
+}

@@ -203,25 +203,14 @@
 
     // Lays out form element with field-label and invalid-message (each optional)
     .control-group {
-        display: block;
-        height: $form-element-height;
-        margin: 0;
-        position: relative;
-        width: 100%;
+        @extend %control-group;
 
-        .field-label,
-        .invalid-message,
-        .invalid-message {
-            position: absolute;
-            top: 0;
-            transform: translateY(-104%);
-            width: 100%;
+        .field-label {
+            @extend %field-label;
         }
 
-        .invalid-message,
         .invalid-message {
-            bottom: 0;
-            transform: translateY(100%);
+            @extend %invalid-message;
         }
     }
 
@@ -299,52 +288,14 @@ $form-border-width: 0.1rem;
 button,
 [type="button"],
 .btn {
-    @extend %text-body-regular;
-    @include form-border;
-    background-color: ui-color(default);
-    border-radius: 0.2rem;
-    color: text-color(normal);
-    font-weight: normal;
-    height: $form-element-height;
-    margin: $tight-margin;
-    padding: 0 3rem;
+    @extend %button;
 
-    &:hover,
-    &:focus {
-        background-color: ui-color(default-hover);
+    &.primary {
+        @extend %primary;
     }
 
-    &:active {
-        background-color: ui-color(default-active);
-    }
-
-    &.small {
-        @extend %text-helper-label;
-        height: 3rem;
-        padding: 0 2rem;
-    }
-
-    &.wide {
-        padding: 0;
-        width: calc(100% - #{$tight-margin});
-    }
-
-    @each $ui-type in primary, secondary {
-        &.#{$ui-type} {
-            background-color: ui-color($ui-type);
-            border: 0;
-            color: text-color(white);
-            font-weight: bold;
-
-            &:hover,
-            &:focus {
-                background-color: ui-color(#{$ui-type}-hover);
-            }
-
-            &:active {
-                background-color: ui-color(#{$ui-type}-active);
-            }
-        }
+    &.secondary {
+        @extend %secondary;
     }
 }
 
@@ -433,43 +384,9 @@ textarea {
 // Styleguide: Form Elements.Button Bar
 
 .button-bar {
-    @include form-border;
-    align-items: baseline;
-    border-radius: 0.2rem;
-    display: inline-flex;
-    height: $form-element-height;
-    padding: 0;
+    @extend %button-bar;
 
-    > * {
-        background-color: ui-color(white);
-        border: 0;
-        border-radius: 0;
-        color: text-color(button-bar);
-        height: 100%;
-        margin: 0;
-        padding: 0 3rem;
-        white-space: nowrap;
-
-        &:focus {
-            z-index: 1;
-        }
-
-        &:not(:last-child) {
-            border-right: thin solid ui-color(form-border);
-        }
-
-        &:hover {
-            background-color: ui-color(form-bg);
-        }
-
-        &[aria-selected="true"] {
-            background-color: ui-color(default-hover);
-            color: text-color(normal);
-        }
-    }
-
-    > :not(button):not(input) {
-        // Compensate for anomaly in how buttons vs non-buttons are rendered
-        transform: translateY(-0.1rem);
+    > [aria-selected="true"] {
+        @extend %selected;
     }
 }
