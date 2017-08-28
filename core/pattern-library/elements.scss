@@ -50,14 +50,33 @@
 // Styleguide: Layout.Content
 
 // Page content is constrained to the middle of the screen
-.content {
+.text,
+p {
+    @extend %text-content;
+}
+
+.flexrow {
     @extend %content;
 
-    &.text,
-    .text,
-    p {
-        @extend %text-content;
+    justify-content: flex-start;
+    margin-left: 0;
+    margin-right: 0;
+    padding-left: 0;
+    padding-right: 0;
+}
+
+// In a form, flexrow spacing is different
+form,
+.form {
+    @extend %form;
+
+    .flexrow {
+        @extend %tightrow;
     }
+}
+
+.content {
+    @extend %content;
 
     // FlexRow
     //
@@ -106,28 +125,10 @@
     // Styleguide: Layout.FlexRow
 
     // Grid System
-    .flexrow {
-        @include bases-with-margin($normal-margin);
-
-        align-items: center;
-        display: flex;
-        flex-flow: row wrap;
-        margin: 0 (-$normal-margin);
-
-        > * {
-            margin: 0.5rem $normal-margin;
-            width: 100%;
-        }
-
-        > button,
-        > .btn {
-            // Trick to make the wrapped buttons have the correct left margin
-            margin: 0.5rem #{($tight-margin - $normal-margin) / 2} 0.5rem $normal-margin;
-            width: auto;
-
-            &:last-child {
-                margin-right: $normal-margin;
-            }
+    @for $b from 2 through 10 {
+        .basis-#{$b} {
+            @extend %griditem;
+            @extend %basis-#{$b};
         }
     }
 
@@ -151,9 +152,9 @@
     //             </div>
     //         </div>
     //         <div class="flexrow">
-    //             <div class="basis-4"><button class="wide">That is why</button></div>
-    //             <div class="basis-4"><button class="wide">Buttons</button></div>
-    //             <div class="basis-4"><button class="wide">Are close-spaced</button></div>
+    //             <button class="basis-4">That is why</button>
+    //             <button class="basis-4">Buttons</button>
+    //             <button class="basis-4">Are close-spaced</button>
     //         </div>
     //         <div class="flexrow">
     //             <div class="basis-4 bg-blue">Some text</div>
@@ -167,22 +168,6 @@
     // </div>
     //
     // Styleguide: Layout.FlexRow.Form
-
-    // In a form, flexrow spacing is different
-    &form,
-    &.form,
-    form,
-    .form {
-        .flexrow {
-            @include bases-with-margin($tight-margin);
-            margin: 0 (-$tight-margin);
-
-            > * {
-                margin: 2rem $tight-margin;
-                max-width: calc(100% - #{2 * $tight-margin});
-            }
-        }
-    }
 
     // Control Group
     //
@@ -314,8 +299,7 @@ button,
 %content form,
 form%content,
 .form {
-    background-color: ui-color(form-bg);
-    padding: 4rem;
+    @extend %form;
 }
 
 label {
@@ -337,7 +321,9 @@ textarea {
     @extend %text-body-regular;
     @include form-border;
     background-color: ui-color(white);
+    box-sizing: border-box;
     color: text-color(normal);
+    flex: 0 0 100%;
     padding: 0 $normal-margin;
     width: 100%;
 

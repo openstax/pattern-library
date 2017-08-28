@@ -30,15 +30,53 @@ $tablet-max: 960px;
     }
 }
 
+%block-item {
+    display: block;
+    margin: 0 0 1rem;
+}
+
+@mixin layout-container($max-width) {
+    box-sizing: border-box;
+    margin-left: auto;
+    margin-right: auto;
+    max-width: $max-width;
+    padding-left: $normal-margin;
+    padding-right: $normal-margin;
+    width: 100%;
+}
+
+@mixin flex-layout-container() {
+    display: flex;
+    flex: 0 0 100%;
+    flex-flow: row wrap;
+    justify-content: center;
+}
+
+%content {
+    @include layout-container($content-max);
+    @include flex-layout-container();
+
+    > %content,
+    > %text-content,
+    > %form {
+        flex-basis: calc(100% + #{2 * $normal-margin});
+        margin-left: -$normal-margin;
+        margin-right: -$normal-margin;
+        width: calc(100% + #{2 * $normal-margin});
+    }
+}
+
+%text-content {
+    @include layout-container($text-content-max);
+}
+
 // .basis-# defines a cell in the row
 // At phone size, all are 100% width
 // At tablet, .basis-2 thru .basis-6 are 50%, others still 100%
 // At desktop, .basis-n is n/12 of the row
 @mixin bases-with-margin($margin) {
     @for $b from 2 through 10 {
-        .basis-#{$b} {
-            flex: 0 1 100%;
-
+        &%basis-#{$b} {
             @if ($b < 7) {
                 @include wider-than($phone-max) {
                     flex-basis: calc(50% - #{$margin});
@@ -46,42 +84,54 @@ $tablet-max: 960px;
             }
 
             @include wider-than($tablet-max) {
-                flex-basis: calc(#{100% * $b / 12} - #{2 * $margin});
-            }
-
-            > :first-child:last-child {
-                margin-left: 0;
-                margin-right: 0;
-                width: 100%;
+                flex-basis: calc(#{100% * $b / 12} + #{$margin * $b / 12 - 2 * $margin});
             }
         }
     }
 }
 
-%block-item {
+@mixin griditem($margin) {
     display: block;
-    margin: 0 0 1rem;
+    margin-left: 0;
+    margin-right: 2 * $margin;
+    flex-basis: 100%;
+
+    @include bases-with-margin($margin);
+
+    @include width-up-to($phone-max) {
+        margin-right: 0;
+    }
+
+    @include wider-than($tablet-max) {
+        &:last-child {
+            margin-right: 0;
+        }
+    }
 }
 
-%content {
-    margin-left: auto;
-    margin-right: auto;
-    max-width: calc(#{$content-max} - #{2 * $normal-margin});
-    width: calc(100% - #{2 * $normal-margin});
-    padding-left: $normal-margin;
-    padding-right: $normal-margin;
+%griditem {
+    @include griditem($normal-margin);
+
+    // If this is in the mixin, it overrides the setting in %form, below
+    margin-bottom: 1rem;
 }
 
-%text-content {
-    @extend %content;
-
-    max-width: calc(#{$text-content-max} - #{2 * $normal-margin});
+%tightrow > %griditem {
+    @include griditem($tight-margin);
 }
 
-// Do not have multiple layers of padding
-%content %content {
-    padding-left: 0;
-    padding-right: 0;
+%form {
+    @include layout-container($text-content-max);
+    @include flex-layout-container();
+
+    background-color: ui-color(form-bg);
+    margin-left: -4rem;
+    margin-right: -4rem;
+    padding: 4rem;
+
+    %griditem {
+        margin-bottom: 4rem;
+    }
 }
 
 // A container that centers content horizontally and vertically
