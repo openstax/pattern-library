@@ -84,7 +84,7 @@ $tablet-max: 960px;
             }
 
             @include wider-than($tablet-max) {
-                flex-basis: calc(#{100% * $b / 12} + #{$margin * $b / 12 - 2 * $margin});
+                flex-basis: calc(#{100% * $b / 12} + #{$margin * $b / 6 - 2 * $margin});
             }
         }
     }
