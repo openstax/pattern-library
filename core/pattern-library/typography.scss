@@ -17,8 +17,14 @@ $font-specs: (
         @if (length($spec) > 2 and nth($spec, 3)) {
             letter-spacing: -0.04 * nth($spec, 1);
         }
+        @else {
+            letter-spacing: normal;
+        }
         @if (length($spec) > 3) {
             font-weight: nth($spec, 4);
+        }
+        @else {
+            font-weight: normal;
         }
     }
 }
