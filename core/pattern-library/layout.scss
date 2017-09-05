@@ -4,28 +4,29 @@ $content-max: 120rem;
 $text-content-max: 80rem;
 $form-element-height: 5rem;
 
-// Screen widths must be in px because @media queries assume 1rem = 16px
-$wide-screen-min: 1400px;
-$phone-max: 480px;
-$tablet-max: 960px;
+// Screen widths must be scaled because @media queries assume 1rem = 16px
+$rem-scale-factor: 0.625;
+$wide-screen-min: 140rem;
+$phone-max: 48rem;
+$tablet-max: 96rem;
 
 // Includes the given (min) width
 @mixin width-up-to($width) {
-    @media (max-width: $width) {
+    @media (max-width: $width * $rem-scale-factor) {
         @content;
     }
 }
 
 // Excludes the given (max) width
 @mixin wider-than($width) {
-    @media (min-width: $width + 1) {
+    @media (min-width: $width * $rem-scale-factor + 1) {
         @content;
     }
 }
 
 // Includes the max width, excludes the min width
 @mixin width-between($width1, $width2) {
-    @media (min-width: $width1 + 1) and (max-width: $width2) {
+    @media (min-width: $width1 * $rem-scale-factor + 1) and (max-width: $width2 * $rem-scale-factor) {
         @content;
     }
 }
