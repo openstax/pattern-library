@@ -9,23 +9,28 @@ $font-specs: (
     helper-label: 1.4rem 2rem
 );
 
+@mixin set-font($name) {
+    $spec: map-get($font-specs, $name);
+    font-size: nth($spec, 1);
+    line-height: nth($spec, 2);
+    @if (length($spec) > 2 and nth($spec, 3)) {
+        letter-spacing: -0.04 * nth($spec, 1);
+    }
+    @else {
+        letter-spacing: normal;
+    }
+    @if (length($spec) > 3) {
+        font-weight: nth($spec, 4);
+    }
+    @else {
+        font-weight: normal;
+    }
+}
+
 // Create %text-hero-h1, etc placeholders
 @each $name, $spec in $font-specs {
     %text-#{$name} {
-        font-size: nth($spec, 1);
-        line-height: nth($spec, 2);
-        @if (length($spec) > 2 and nth($spec, 3)) {
-            letter-spacing: -0.04 * nth($spec, 1);
-        }
-        @else {
-            letter-spacing: normal;
-        }
-        @if (length($spec) > 3) {
-            font-weight: nth($spec, 4);
-        }
-        @else {
-            font-weight: normal;
-        }
+        @include set-font($name);
     }
 }
 
@@ -37,18 +42,28 @@ $tutor-font-specs: (
     h4: 1.6rem 2.5rem
 );
 
-// Create .tutor placeholders
-@each $name, $spec in $tutor-font-specs {
-    %tutor %text-#{$name} {
+@mixin set-tutor-font($name) {
+    @if (map-has-key($tutor-font-specs, $name)) {
+        $spec: map-get($tutor-font-specs, $name);
         font-size: nth($spec, 1);
         font-weight: bold;
         line-height: nth($spec, 2);
         letter-spacing: -0.04 * nth($spec, 1);
+
+        @if ($name == h3) {
+            font-weight: normal;
+            letter-spacing: 0;
+            text-transform: uppercase;
+        }
+    }
+    @else {
+        @include set-font($name);
     }
 }
 
-%tutor %text-h3 {
-    font-weight: normal;
-    letter-spacing: 0;
-    text-transform: uppercase;
+// Create .tutor placeholders
+@each $name, $spec in $tutor-font-specs {
+    %tutor %text-#{$name} {
+        @include set-tutor-font($name);
+    }
 }
