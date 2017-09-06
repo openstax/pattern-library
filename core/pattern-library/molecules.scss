@@ -45,7 +45,7 @@ $form-border-width: 0.1rem;
     }
 
     &.small {
-        @extend %text-helper-label;
+        @include set-font(helper-label);
         height: 3rem;
         padding: 0 2rem;
     }
