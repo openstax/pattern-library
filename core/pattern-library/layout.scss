@@ -136,9 +136,13 @@ $tablet-max: 96rem;
 }
 
 // A container that centers content horizontally and vertically
-%center {
+@mixin center() {
     align-items: center;
     display: flex;
     justify-content: center;
     text-align: center;
+}
+
+%center {
+    @include center();
 }

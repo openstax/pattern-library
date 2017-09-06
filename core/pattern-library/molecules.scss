@@ -8,24 +8,40 @@ $form-border-width: 0.1rem;
     border: $form-border-width solid ui-color(form-border);
 }
 
-%button {
-    @extend %text-body-regular;
-    @include form-border;
-    background-color: ui-color(default);
-    border-radius: 0.2rem;
-    color: text-color(normal);
-    font-weight: normal;
+@mixin button($type: default) {
+    @include center;
+    @include set-font(body-regular);
+
+    @if ($type == default) {
+        @include form-border;
+
+        border-radius: 0.2rem;
+        color: text-color(normal);
+        font-weight: normal;
+    }
+    @else {
+        border: 0;
+        color: text-color(white);
+        font-weight: bold;
+    }
+
+    background-color: ui-color($type);
+    box-sizing: border-box;
+    cursor: default;
     height: $form-element-height;
     margin: $tight-margin;
     padding: 0 3rem;
+    text-decoration: none;
+    user-select: none;
+    width: auto;
 
     &:hover,
     &:focus {
-        background-color: ui-color(default-hover);
+        background-color: ui-color(#{$type}-hover);
     }
 
     &:active {
-        background-color: ui-color(default-active);
+        background-color: ui-color(#{$type}-active);
     }
 
     &.small {
@@ -38,28 +54,23 @@ $form-border-width: 0.1rem;
         padding: 0;
         width: calc(100% - #{$tight-margin});
     }
+}
 
-    @each $ui-type in primary, secondary {
-        &%#{$ui-type} {
-            background-color: ui-color($ui-type);
-            border: 0;
-            color: text-color(white);
-            font-weight: bold;
+%button {
+    @include button();
+}
 
-            &:hover,
-            &:focus {
-                background-color: ui-color(#{$ui-type}-hover);
-            }
+%button%primary {
+    @include button(primary);
+}
 
-            &:active {
-                background-color: ui-color(#{$ui-type}-active);
-            }
-        }
-    }
+%button%secondary {
+    @include button(secondary);
 }
 
 @mixin button-bar() {
     @include form-border;
+
     align-items: baseline;
     border-radius: 0.2rem;
     display: inline-flex;
@@ -67,16 +78,15 @@ $form-border-width: 0.1rem;
     padding: 0;
 
     > * {
-        align-items: center;
+        @include button();
+
         background-color: ui-color(white);
-        border-radius: 0;
         border: 0;
         color: text-color(button-bar);
-        display: flex;
+        font-family: inherit;
         height: 100%;
         margin: 0;
         max-height: 100%;
-        padding: 0 3rem;
         white-space: nowrap;
 
         &:focus {
@@ -126,5 +136,15 @@ $form-border-width: 0.1rem;
     %invalid-message {
         bottom: 0;
         transform: translateY(100%);
+    }
+}
+
+@mixin link() {
+    color: text-color(link);
+    text-decoration: underline;
+
+    &:hover,
+    &:active {
+        color: text-color(link-hover);
     }
 }

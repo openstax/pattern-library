@@ -224,24 +224,7 @@ form,
 // Styleguide: Typography.Links
 
 a {
-    color: text-color(link);
-    text-decoration: underline;
-
-    &:hover,
-    &:active {
-        color: text-color(link-hover);
-    }
-
-    &.btn {
-        text-decoration: none;
-    }
-}
-
-@mixin button-behavior {
-    @extend %center;
-    cursor: default;
-    display: inline-flex;
-    user-select: none;
+    @include link();
 }
 
 $form-border-width: 0.1rem;
@@ -257,7 +240,7 @@ $form-border-width: 0.1rem;
 // Markup:
 // <button class="{{modifier_class}}">Native button</button>
 // <input type="button" class="{{modifier_class}}" value="input[type='button']"/>
-// <div class="btn {{modifier_class}}">Anything styled like a button</div>
+// <span class="btn {{modifier_class}}">Anything styled like a button</span>
 //
 // .small - Not as tall
 // .wide - The width of the enclosing container
@@ -266,20 +249,20 @@ $form-border-width: 0.1rem;
 //
 // Styleguide: Form Elements.Buttons
 
-.btn {
-    @include button-behavior;
-}
-
 button,
 [type="button"],
+[type="submit"],
+[type="reset"],
 .btn {
     @extend %button;
 
-    &.primary {
+    &.primary,
+    &[type="submit"] {
         @extend %primary;
     }
 
-    &.secondary {
+    &.secondary,
+    &[type="reset"] {
         @extend %secondary;
     }
 }
