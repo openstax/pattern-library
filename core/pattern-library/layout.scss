@@ -19,14 +19,14 @@ $tablet-max: 96rem;
 
 // Excludes the given (max) width
 @mixin wider-than($width) {
-    @media (min-width: $width * $rem-scale-factor + 1) {
+    @media (min-width: $width * $rem-scale-factor + 0.1 * $rem-scale-factor) {
         @content;
     }
 }
 
 // Includes the max width, excludes the min width
 @mixin width-between($width1, $width2) {
-    @media (min-width: $width1 * $rem-scale-factor + 1) and (max-width: $width2 * $rem-scale-factor) {
+    @media (min-width: $width1 * $rem-scale-factor + 0.1 * $rem-scale-factor) and (max-width: $width2 * $rem-scale-factor) {
         @content;
     }
 }
