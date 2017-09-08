@@ -1,0 +1,10 @@
+language: node_js
+sudo: false
+notifications:
+  email: false
+script:
+  - ./script/setup
+  - ./script/build
+after_script:
+  # Report coverage to codecov
+  - bash <(curl -s https://codecov.io/bash)
