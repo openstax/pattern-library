@@ -4,29 +4,30 @@ $content-max: 120rem;
 $text-content-max: 80rem;
 $form-element-height: 5rem;
 
-// Screen widths must be scaled because @media queries assume 1rem = 16px
-$rem-scale-factor: 0.625;
-$wide-screen-min: 140rem;
-$phone-max: 48rem;
-$tablet-max: 96rem;
+// Per https://zellwk.com/blog/media-query-units/
+// only em units handle consistently across browsers.
+// Safari/iOS behaves differently from others when using rem or px and scaled fonts
+$wide-screen-min: 140em;
+$phone-max: 48em;
+$tablet-max: 96em;
 
 // Includes the given (min) width
 @mixin width-up-to($width) {
-    @media (max-width: $width * $rem-scale-factor) {
+    @media (max-width: $width) {
         @content;
     }
 }
 
 // Excludes the given (max) width
 @mixin wider-than($width) {
-    @media (min-width: $width * $rem-scale-factor + 0.1 * $rem-scale-factor) {
+    @media (min-width: $width + 0.1) {
         @content;
     }
 }
 
 // Includes the max width, excludes the min width
 @mixin width-between($width1, $width2) {
-    @media (min-width: $width1 * $rem-scale-factor + 0.1 * $rem-scale-factor) and (max-width: $width2 * $rem-scale-factor) {
+    @media (min-width: $width1 + 0.1) and (max-width: $width2) {
         @content;
     }
 }
