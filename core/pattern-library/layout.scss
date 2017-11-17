@@ -7,9 +7,11 @@ $form-element-height: 5rem;
 // Per https://zellwk.com/blog/media-query-units/
 // only em units handle consistently across browsers.
 // Safari/iOS behaves differently from others when using rem or px and scaled fonts
-$wide-screen-min: 140em;
-$phone-max: 48em;
-$tablet-max: 96em;
+// We want the numbers to be in 10-pixel ems, so scale them
+$scale-factor: 10 / 16;
+$wide-screen-min: 140em * $scale-factor;
+$phone-max: 48em * $scale-factor;
+$tablet-max: 96em * $scale-factor;
 
 // Includes the given (min) width
 @mixin width-up-to($width) {
