@@ -176,13 +176,15 @@ form,
     // the input element in a `label`, put the text in a `span.field-label`.
     //
     // Markup:
-    // <form>
-    //     <div class="control-group">
-    //         <label class="field-label">Field Label</label>
-    //         <input placeholder="Placeholder text" pattern="g" required>
-    //         <div class="invalid-message">Enter a g</div>
-    //     </div>
-    // </form>
+    // <div class="content">
+    //     <form>
+    //         <div class="control-group">
+    //             <label class="field-label">Field Label</label>
+    //             <input placeholder="Placeholder text" pattern="g" required>
+    //             <div class="invalid-message">Enter a g</div>
+    //         </div>
+    //     </form>
+    // </div>
     //
     // Styleguide: Form Elements.Control Group
 
@@ -267,6 +269,29 @@ button,
     }
 }
 
+// Tabs
+//
+// Tabs are headers of ordinary text color and size in a `.tab-group`
+// The active tab has a green border-bottom.
+//
+// Markup:
+// <div class="content">
+//     <div class="tab-group">
+//         <div class="tab active">Section 1</div>
+//         <div class="tab">Section 2</div>
+//         <div class="tab">Section 3</div>
+//     </div>
+// </div>
+//
+// Styleguide: Layout.Tabs
+.tab-group {
+    @extend %tab-group;
+
+    .tab {
+        @extend %tab;
+    }
+}
+
 // Form
 //
 // Forms get a slightly different background color and a healthy bit of padding to
@@ -275,8 +300,10 @@ button,
 // `.form` class to apply to anything else.
 //
 // Markup:
-// <form class="content">A form container</form>
-// <div class="form">A container styled the same</div>
+// <div class="content">
+//     <form class="content">A form container</form>
+//     <div class="form">A container styled the same</div>
+// </div>
 //
 // Styleguide: Form Elements.Form
 %content form,
@@ -358,4 +385,74 @@ textarea {
     > [aria-selected="true"] {
         @extend %selected;
     }
+}
+
+// Confirmation boxes
+//
+//
+//
+// Markup:
+// <div class="content">
+//     <div class="message-box">Success message</div>
+//     <div class="message-box error">Error message</div>
+// </div>
+//
+// Styleguide: Messsages.Confirmation boxes
+
+.message-box {
+    @extend %message-box;
+
+    &.error {
+        @extend %error;
+    }
+}
+
+// Modal dialogs
+//
+// Font-awesome icons should be used, but are not available to this demo page.
+// Modals should additionally have
+// ```
+// position: fixed;
+// left: 50%;
+// top: 50%;
+// transform: translate(-50%, -50%);
+// z-index: _some high number_;
+// ```
+//
+// Markup:
+    // <div class="modal">
+    //     <div class="heading">
+    //         Modal header
+    //         <i class="close-icon">&times;</i>
+    //     </div>
+    //     <p>
+    //         Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+    //         eiusmod tempor incididunt ut labore et dolore magna liqua. Ut
+    //         enim ad minim veniam, quis nostrud exercitation ullamco laboris
+    //         nisi ut aliquip ex ea commodo consequat.
+    //     </p>
+    //     <div class="flexrow">
+    //         <button type="button" class="primary">Primary action</button>
+    //         <button type="button">Default</button>
+    //     </div>
+    // </div>
+    // <hr>
+    // <div class="modal error">
+    //     <div class="heading">
+    //         <i class="error-icon">!</i>
+    //         Error heading
+    //     </div>
+    //     <p>
+    //       Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+    //       eiusmod tempor incididunt ut labore et dolore magna liqua. Ut
+    //       enim ad minim veniam, quis nostrud exercitation ullamco laboris
+    //       nisi ut aliquip ex ea commodo consequat.
+    //     </p>
+    //     <div><a href="https://packages.cnx.org/pattern-library/latest/">Link text</a></div>
+    // </div>
+//
+// Styleguide: Messsages.Modal dialogs
+
+.modal {
+    @extend %modal;
 }
