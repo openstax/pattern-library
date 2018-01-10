@@ -20,6 +20,8 @@ The files of interest in using the library are
  - `headers.scss`, which you can `@import` to make mixins and placeholders available for use
  - `elements.scss`, which applies those stylings to particular classes and element types
 
+ The visual reference for the Pattern Library is [here](https://sketchviewer.com/sketches/59766aabb57e8900114c89ce/latest/)
+
 
 [travis-image]: https://img.shields.io/travis/openstax/pattern-library.svg
 [travis-url]: https://travis-ci.org/openstax/pattern-library

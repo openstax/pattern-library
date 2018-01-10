@@ -27,12 +27,13 @@ $form-border-width: 0.1rem;
 
     background-color: ui-color($type);
     box-sizing: border-box;
-    cursor: default;
+    cursor: pointer;
     height: $form-element-height;
     margin: $tight-margin;
-    padding: 0 3rem;
+    padding: 0 2 * $normal-margin;
     text-decoration: none;
     user-select: none;
+    white-space: nowrap; // Because height is set, no room for wrapped text
     width: auto;
 
     &:first-child {
@@ -123,6 +124,45 @@ $form-border-width: 0.1rem;
 
     > %selected {
         @include button-bar-selected();
+    }
+}
+
+%non-button-input {
+    @extend %text-body-regular;
+    @include form-border;
+    background-color: ui-color(white);
+    box-sizing: border-box;
+    color: text-color(normal);
+    flex: 0 0 100%;
+    padding: 0 $normal-margin;
+    width: 100%;
+
+    &:focus {
+        border: thin solid os-color(light-blue);
+        box-shadow: 0 0 4px 0 rgba(os-color(light-blue), 0.5);
+        outline: none;
+    }
+
+    &::placeholder {
+        color: text-color(helper);
+    }
+
+    // Marking invalid items can be delayed
+    &:not(.delay-validation):invalid {
+        background-color: ui-color(error-bg);
+        border: thin solid ui-color(error-border);
+        color: text-color(error);
+
+        ~ %invalid-message {
+            @extend %text-helper-label;
+            color: text-color(error);
+            display: block;
+        }
+    }
+
+    ~ %invalid-message {
+        display: none;
+        pointer-events: none;
     }
 }
 
