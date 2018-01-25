@@ -50,11 +50,11 @@ $tablet-max: 96em * $scale-factor;
     width: 100%;
 }
 
-@mixin flex-layout-container() {
+@mixin flex-layout-container($justify: center) {
     display: flex;
     flex: 0 0 100%;
     flex-flow: row wrap;
-    justify-content: center;
+    justify-content: $justify;
 }
 
 %content {
@@ -80,7 +80,7 @@ $tablet-max: 96em * $scale-factor;
 // At tablet, .basis-2 thru .basis-6 are 50%, others still 100%
 // At desktop, .basis-n is n/12 of the row
 @mixin bases-with-margin($margin) {
-    @for $b from 2 through 10 {
+    @for $b from 2 through 12 {
         &%basis-#{$b} {
             @if ($b < 7) {
                 @include wider-than($phone-max) {
@@ -135,7 +135,7 @@ $tablet-max: 96em * $scale-factor;
     padding: 4rem;
 
     %griditem {
-        margin-bottom: 4rem;
+        margin-bottom: 5rem;
     }
 }
 

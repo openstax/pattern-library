@@ -125,7 +125,7 @@ form,
     // Styleguide: Layout.FlexRow
 
     // Grid System
-    @for $b from 2 through 10 {
+    @for $b from 2 through 12 {
         .basis-#{$b} {
             @extend %griditem;
             @extend %basis-#{$b};
@@ -174,14 +174,24 @@ form,
     // Optional containers `.field-label` and `.invalid-message`<br>
     // `.field-label` *must not* enclose the input element, so if you are wrapping
     // the input element in a `label`, put the text in a `span.field-label`.
+    // Add `delay-validation` class to avoid showing validation state
     //
     // Markup:
     // <div class="content">
     //     <form>
-    //         <div class="control-group">
-    //             <label class="field-label">Field Label</label>
-    //             <input placeholder="Placeholder text" pattern="g" required>
-    //             <div class="invalid-message">Enter a g</div>
+    //         <div class="flexrow">
+    //             <div class="control-group basis-12">
+    //                 <label class="field-label">Field Label</label>
+    //                 <input placeholder="Placeholder text" pattern="g" required>
+    //                 <div class="invalid-message">Enter a g</div>
+    //             </div>
+    //         </div>
+    //         <div class="flexrow">
+    //             <div class="control-group basis-6">
+    //                 <label class="field-label">Field Label</label>
+    //                 <input class="delay-validation" placeholder="Invalid, but does not show" pattern="g" required>
+    //                 <div class="invalid-message">Enter a g</div>
+    //             </div>
     //         </div>
     //     </form>
     // </div>
@@ -326,42 +336,12 @@ input {
     height: $form-element-height;
 }
 
-input:not([type="button"]):not([type="submit"]),
+input:not([type="button"]):not([type="submit"]):not([type="reset"]):not([type="image"]):not([type="radio"]):not([type="checkbox"]),
 textarea {
-    @extend %text-body-regular;
-    @include form-border;
-    background-color: ui-color(white);
-    box-sizing: border-box;
-    color: text-color(normal);
-    flex: 0 0 100%;
-    padding: 0 $normal-margin;
-    width: 100%;
+    @extend %non-button-input;
 
-    &:focus {
-        border: thin solid os-color(light-blue);
-        box-shadow: 0 0 4px 0 rgba(os-color(light-blue), 0.5);
-        outline: none;
-    }
-
-    &::placeholder {
-        color: text-color(helper);
-    }
-
-    &:invalid {
-        background-color: ui-color(error-bg);
-        border: thin solid ui-color(error-border);
-        color: text-color(error);
-
-        ~ .invalid-message {
-            @extend %text-helper-label;
-            color: text-color(error);
-            display: block;
-        }
-    }
-
-    ~ .invalid-message {
-        display: none;
-        pointer-events: none;
+    .invalid-message {
+        @extend %invalid-message;
     }
 }
 
