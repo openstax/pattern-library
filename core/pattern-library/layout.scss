@@ -35,11 +35,6 @@ $tablet-max: 96em * $scale-factor;
     }
 }
 
-%block-item {
-    display: block;
-    margin: 0 0 1rem;
-}
-
 @mixin layout-container($max-width) {
     box-sizing: border-box;
     margin-left: auto;
@@ -57,22 +52,29 @@ $tablet-max: 96em * $scale-factor;
     justify-content: $justify;
 }
 
-%content {
+@mixin content {
     @include layout-container($content-max);
-    @include flex-layout-container();
 
-    > %content,
-    > %text-content,
-    > %form {
-        flex-basis: calc(100% + #{2 * $normal-margin});
-        margin-left: -$normal-margin;
-        margin-right: -$normal-margin;
-        width: calc(100% + #{2 * $normal-margin});
+    %content {
+        padding: 0;
+    }
+}
+
+%content {
+    @include content;
+}
+
+@mixin text-content {
+    @include layout-container($text-content-max);
+
+    %content,
+    %text-content {
+        padding: 0;
     }
 }
 
 %text-content {
-    @include layout-container($text-content-max);
+    @include text-content;
 }
 
 // .basis-# defines a cell in the row
@@ -125,18 +127,20 @@ $tablet-max: 96em * $scale-factor;
     @include griditem($tight-margin);
 }
 
-%form {
+@mixin form() {
     @include layout-container($text-content-max);
     @include flex-layout-container();
 
     background-color: ui-color(form-bg);
-    margin-left: -4rem;
-    margin-right: -4rem;
     padding: 4rem;
 
     %griditem {
         margin-bottom: 5rem;
     }
+}
+
+%form {
+    @include form;
 }
 
 // A container that centers content horizontally and vertically
@@ -145,8 +149,4 @@ $tablet-max: 96em * $scale-factor;
     display: flex;
     justify-content: center;
     text-align: center;
-}
-
-%center {
-    @include center();
 }

@@ -8,46 +8,21 @@ $form-border-width: 0.1rem;
     border: $form-border-width solid ui-color(form-border);
 }
 
-@mixin button($type: default) {
+@mixin button-basic() {
     @include center;
     @include set-font(body-regular);
 
-    @if ($type == default) {
-        @include form-border;
-
-        border-radius: 0.2rem;
-        color: text-color(normal);
-        font-weight: normal;
-    }
-    @else {
-        border: 0;
-        color: text-color(white);
-        font-weight: bold;
-    }
-
-    background-color: ui-color($type);
+    // Large button is the default
     box-sizing: border-box;
     cursor: pointer;
+    display: inline-flex;
     height: $form-element-height;
-    margin: $tight-margin;
+    margin: 0;
     padding: 0 2 * $normal-margin;
     text-decoration: none;
     user-select: none;
     white-space: nowrap; // Because height is set, no room for wrapped text
     width: auto;
-
-    &:first-child {
-        margin-left: 0;
-    }
-
-    &:hover,
-    &:focus {
-        background-color: ui-color(#{$type}-hover);
-    }
-
-    &:active {
-        background-color: ui-color(#{$type}-active);
-    }
 
     &.small {
         @include set-font(helper-label);
@@ -65,19 +40,50 @@ $form-border-width: 0.1rem;
     }
 }
 
+@mixin button-type-specific($type: default) {
+    @if ($type == default) {
+        @include form-border;
+
+        border-radius: 0.2rem;
+        color: text-color(normal);
+        font-weight: normal;
+    }
+    @else {
+        border: 0;
+        color: text-color(white);
+        font-weight: bold;
+    }
+
+    background-color: ui-color($type);
+
+    &:hover,
+    &:focus {
+        background-color: ui-color(#{$type}-hover);
+    }
+
+    &:active {
+        background-color: ui-color(#{$type}-active);
+    }
+}
+
+@mixin button {
+    @include button-basic;
+    @include button-type-specific(default);
+
+    &%primary {
+        @include button-type-specific(primary);
+    }
+
+    &%secondary {
+        @include button-type-specific(secondary);
+    }
+}
+
 %button {
-    @include button();
+    @include button;
 }
 
-%button%primary {
-    @include button(primary);
-}
-
-%button%secondary {
-    @include button(secondary);
-}
-
-@mixin button-bar() {
+@mixin button-bar {
     @include form-border;
 
     align-items: baseline;
@@ -87,7 +93,7 @@ $form-border-width: 0.1rem;
     padding: 0;
 
     > * {
-        @include button();
+        @extend %button;
 
         background-color: ui-color(white);
         border: 0;
@@ -110,7 +116,6 @@ $form-border-width: 0.1rem;
             background-color: ui-color(form-bg);
         }
     }
-
 }
 
 @mixin button-bar-selected() {
@@ -119,16 +124,15 @@ $form-border-width: 0.1rem;
 }
 
 %button-bar {
-
-    @include button-bar();
+    @include button-bar;
 
     > %selected {
         @include button-bar-selected();
     }
 }
 
-%non-button-input {
-    @extend %text-body-regular;
+@mixin non-button-input() {
+    @include set-font(body-regular);
     @include form-border;
     background-color: ui-color(white);
     box-sizing: border-box;
@@ -154,7 +158,7 @@ $form-border-width: 0.1rem;
         color: text-color(error);
 
         ~ %invalid-message {
-            @extend %text-helper-label;
+            @include set-font(helper-label);
             color: text-color(error);
             display: block;
         }
@@ -166,23 +170,50 @@ $form-border-width: 0.1rem;
     }
 }
 
-%tab-group {
-    border-bottom: thin solid ui-color(form-border);
+%non-button-input {
+    @include non-button-input;
+}
+
+@mixin tab-group() {
+    border: 0;
     display: flex;
     justify-content: flex-start;
     padding: 0;
-    width: 100%;
+    width: auto;
 
     %tab {
-        display: inline;
-        padding: 0.4rem $normal-margin;
+        align-items: baseline;
+        border-bottom: 0.4rem solid transparent;
+        cursor: pointer;
+        display: inline-flex;
+        justify-content: center;
+        margin-bottom: 0;
+        padding: 5rem $normal-margin 0.3rem;
 
-        &:hover,
-        &:active,
-        &.active {
+        &:hover {
+            border-bottom: 0.4rem solid lighten(os-color(green), 50%);
+        }
+
+        &%active {
             border-bottom: 0.4rem solid os-color(green);
         }
     }
+}
+
+@mixin tab-baseline() {
+    background-color: ui-color(form-border);
+    border: 0;
+    display: block;
+    height: 0.1rem;
+    margin: 0;
+    width: 100%;
+}
+
+%tab-group {
+    @include tab-group;
+}
+%tab-baseline {
+    @include tab-baseline;
 }
 
 %control-group {
@@ -208,6 +239,9 @@ $form-border-width: 0.1rem;
 
 @mixin link() {
     color: text-color(link);
+    display: inline-grid;
+    grid-auto-flow: column;
+    grid-column-gap: 0.7rem;
     text-decoration: underline;
 
     &:hover,
@@ -216,7 +250,7 @@ $form-border-width: 0.1rem;
     }
 }
 
-%message-box {
+@mixin message-box {
     align-items: center;
     background-color: ui-color(success-bg);
     border: thin solid ui-color(success-border);
@@ -234,7 +268,11 @@ $form-border-width: 0.1rem;
     }
 }
 
-%modal {
+%message-box {
+    @include message-box;
+}
+
+@mixin modal {
     border: thin solid ui-color(form-border);
     box-shadow: 0 1rem 2rem 0 rgba(0, 0, 0, 0.2);
     display: block;
@@ -268,4 +306,8 @@ $form-border-width: 0.1rem;
             margin-right: 1rem;
         }
     }
+}
+
+%modal {
+    @include modal;
 }

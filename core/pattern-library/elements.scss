@@ -1,6 +1,82 @@
 @import 'headers';
-@import 'elements/document';
-@import 'elements/headings';
+
+html {
+    font-family: 'Neue Helvetica W01', sans-serif;
+    // This resets rem from 16px to 10px
+    font-size: 62.5%;
+}
+
+body {
+    // @extend %text-body-regular;
+    @include set-font(body-regular);
+
+    background-color: ui-color(page-bg);
+    color: text-color(normal);
+    margin: 0;
+    min-height: 100vh;
+}
+
+// Headings
+//
+// Each heading size has a placeholder selector, so you can use, e.g.,
+// <code>
+// @extend %text-h1;
+// </code>
+// to apply h1-style font to some other element type.
+//
+// Markup:
+// <div class="{{modifier_class}}">
+//     <div class="hero"><h1>H1 in a hero (%text-hero-h1)</h1></div>
+//     <h1>H1 heading (%text-h1)</h1>
+//     <h2>H2 heading (%text-h2)</h2>
+//     <h3>H3 heading (%text-h3)</h3>
+//     <h4>H4 heading (%text-h4)</h4>
+// </div>
+//
+// .tutor - if enclosed in a `.tutor`, uses OpenStax Tutor typography. Recommend
+// putting this class on the `body` element.
+//
+// Styleguide: Typography.Headings
+
+h1,
+h2,
+h3,
+h4 {
+    margin-bottom: 1rem;
+}
+
+// These should be @extend %text-h1, etc., but that causes SASS to duplicated
+// lots of stuff.
+h1 {
+    @include set-font(h1);
+}
+
+.hero h1 {
+    // @extend %text-hero-h1;
+    @include set-font(hero-h1);
+}
+
+h2 {
+    // @extend %text-h2;
+    @include set-font(h2);
+    margin-top: 2rem;
+}
+
+h3 {
+    // @extend %text-h3;
+    @include set-font(h3);
+    margin-top: 1.5rem;
+}
+
+h4 {
+    // @extend %text-h4;
+    @include set-font(h4);
+    margin-top: 1rem;
+}
+
+.tutor {
+    @extend %tutor;
+}
 
 @each $name, $spec in $os-colors {
     #{".bg-" + $name} {
@@ -57,18 +133,22 @@ p {
 
 .flexrow {
     @extend %content;
+    @include flex-layout-container(flex-start);
 
-    justify-content: flex-start;
     margin-left: 0;
     margin-right: 0;
     padding-left: 0;
     padding-right: 0;
+
+    > %button {
+        margin: 0 2 * $tight-margin 1rem 0;
+    }
 }
 
 // In a form, flexrow spacing is different
 form,
 .form {
-    @extend %form;
+    @include form;
 
     .flexrow {
         @extend %tightrow;
@@ -81,7 +161,7 @@ form,
     // FlexRow
     //
     // Multiple items in a `.flexrow` are laid out based on a 12-column grid. Each item
-    // is given a class `.basis-`*n*, where *n* can be from 2 to 10. The FlexRow takes
+    // is given a class `.basis-`*n*, where *n* can be from 2 to 12. The FlexRow takes
     // care of sizing and wrapping appropriately on narrower screens.
     //
     // Markup:
@@ -101,6 +181,14 @@ form,
     //         <div class="basis-5 bg-light-gray">Basis 5</div>
     //     </div>
     //     <div class="flexrow">
+    //         <button>Buttons</button>
+    //         <button>in a</button>
+    //         <button>flexrow</button>
+    //         <button>are spaced</button>
+    //         <button>more</button>
+    //         <button>narrowly</button>
+    //     </div>
+    //     <div class="flexrow">
     //         <div class="basis-4 bg-medium-blue">Basis 4</div>
     //         <div class="basis-8 bg-orange">Basis 8</div>
     //     </div>
@@ -111,14 +199,6 @@ form,
     //                 <code>basis</code>) inside a <code>div.flexrow</code>.
     //             </div>
     //         </div>
-    //     </div>
-    //     <div class="flexrow">
-    //         <button>Buttons</button>
-    //         <button>in a</button>
-    //         <button>flexrow</button>
-    //         <button>are spaced</button>
-    //         <button>more</button>
-    //         <button>narrowly</button>
     //     </div>
     // </div>
     //
@@ -223,26 +303,23 @@ form,
 // Styleguide: Typography.Copy
 
 .copy-large {
-    @extend %text-body-large;
+    @include set-font(body-large);
 }
 
 // Links
 //
 // Text shades slightly in `:hover` and `:active` states.
+// Separate elements inside links (think icon and text) will be separated by 7px.
+// To avoid separation, wrap them in a span.
 //
 // Markup:
-// <a href="#">Link text</a>
+// Here is some <a href="#">Link text</a>
+// and some <a href="#"><i>icon</i>link text</a>
 //
 // Styleguide: Typography.Links
 
 a {
     @include link();
-}
-
-$form-border-width: 0.1rem;
-
-@mixin form-border {
-    border: $form-border-width solid ui-color(form-border);
 }
 
 // Buttons
@@ -254,7 +331,8 @@ $form-border-width: 0.1rem;
 // <input type="button" class="{{modifier_class}}" value="input[type='button']"/>
 // <span class="btn {{modifier_class}}">Anything styled like a button</span>
 //
-// .small - Not as tall
+// .medium - Less vertical padding
+// .small - Smaller font, less padding on all sides
 // .wide - The width of the enclosing container
 // .primary - Colored to stand out
 // .secondary - Colored to stand out a bit less than primary
@@ -266,6 +344,7 @@ button,
 [type="submit"],
 [type="reset"],
 .btn {
+    // This actually reduces total code size
     @extend %button;
 
     &.primary,
@@ -291,15 +370,25 @@ button,
 //         <div class="tab">Section 2</div>
 //         <div class="tab">Section 3</div>
 //     </div>
+//     <hr class="tab-baseline">
 // </div>
 //
 // Styleguide: Layout.Tabs
 .tab-group {
-    @extend %tab-group;
+    @include tab-group;
 
     .tab {
         @extend %tab;
+
+        &.active,
+        &.selected {
+            @extend %active;
+        }
     }
+}
+
+.tab-baseline {
+    @include tab-baseline;
 }
 
 // Form
@@ -319,11 +408,12 @@ button,
 %content form,
 form%content,
 .form {
-    @extend %form;
+    @include form;
 }
 
 label {
-    @extend %text-helper-label;
+    @include set-font(helper-label);
+
     color: text-color(helper);
     width: 100%;
 
@@ -338,7 +428,7 @@ input {
 
 input:not([type="button"]):not([type="submit"]):not([type="reset"]):not([type="image"]):not([type="radio"]):not([type="checkbox"]),
 textarea {
-    @extend %non-button-input;
+    @include non-button-input;
 
     .invalid-message {
         @extend %invalid-message;
@@ -360,12 +450,13 @@ textarea {
 // Styleguide: Form Elements.Button Bar
 
 .button-bar {
-    @extend %button-bar;
+    @include button-bar;
 
     > [aria-selected="true"] {
         @extend %selected;
     }
 }
+
 
 // Confirmation boxes
 //
@@ -377,10 +468,10 @@ textarea {
 //     <div class="message-box error">Error message</div>
 // </div>
 //
-// Styleguide: Messsages.Confirmation boxes
+// Styleguide: Messages.Confirmation boxes
 
 .message-box {
-    @extend %message-box;
+    @include message-box;
 
     &.error {
         @extend %error;
@@ -431,8 +522,8 @@ textarea {
     //     <div><a href="https://packages.cnx.org/pattern-library/latest/">Link text</a></div>
     // </div>
 //
-// Styleguide: Messsages.Modal dialogs
+// Styleguide: Messages.Modal dialogs
 
 .modal {
-    @extend %modal;
+    @include modal;
 }
