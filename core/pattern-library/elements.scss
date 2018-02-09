@@ -131,123 +131,98 @@ p {
     @extend %text-content;
 }
 
-.flexrow {
-    @extend %content;
-    @include flex-layout-container(flex-start);
-
-    margin-left: 0;
-    margin-right: 0;
-    padding-left: 0;
-    padding-right: 0;
-
-    > %button {
-        margin: 0 2 * $tight-margin 1rem 0;
-    }
-}
-
 // In a form, flexrow spacing is different
 form,
 .form {
     @include form;
+}
 
-    .flexrow {
-        @extend %tightrow;
-    }
+.grid {
+    @include grid;
+}
+
+.button-group {
+    @include tight-row;
+
+    max-width: 100%;
 }
 
 .content {
     @extend %content;
 
-    // FlexRow
+    // Grid layout
     //
-    // Multiple items in a `.flexrow` are laid out based on a 12-column grid. Each item
-    // is given a class `.basis-`*n*, where *n* can be from 2 to 12. The FlexRow takes
-    // care of sizing and wrapping appropriately on narrower screens.
+    // Adding the `.grid` class to a container sets it up as a 12-column grid for
+    // desktop displays, a 2-column grid for tablets, and a 1-column grid for phone.
+    // Contents by default will be 100% of the grid width. Adding a class of `basis-2`
+    // makes the item 2 columns wide, `basis-3` makes it 3 columns wide, etc.
+    //
+    // There is no row element. The items will wrap as necessary. Buttons should be
+    // put into a `.button-group`, which will space them closer together. You will
+    // need to ensure that the buttons fit narrow desktop screens. Buttons that are
+    // naturally wider than 10rem may get too small for their contents.
     //
     // Markup:
-    // <div class="content">
-    //     <div class="flexrow">
-    //         <div class="basis-2 bg-blue">Basis 2</div>
-    //         <div class="basis-10 bg-gold">Basis 10</div>
-    //     </div>
-    //     <div class="flexrow">
-    //         <div class="basis-2 bg-deep-green">Basis 2<br>extra-tall</div>
-    //         <div class="basis-3 bg-gray">Basis 3</div>
-    //         <div class="basis-4 bg-green">Basis 4</div>
-    //         <div class="basis-3 bg-red">Basis 3</div>
-    //     </div>
-    //     <div class="flexrow">
-    //         <div class="basis-7 bg-light-blue">Basis 7</div>
-    //         <div class="basis-5 bg-light-gray">Basis 5</div>
-    //     </div>
-    //     <div class="flexrow">
+    // <div class="content grid">
+    //     <div class="basis-2 bg-blue">Basis 2</div>
+    //     <div class="basis-10 bg-gold">Basis 10</div>
+    //     <div class="basis-2 bg-deep-green">Basis 2<br>extra-tall</div>
+    //     <div class="basis-3 bg-gray">Basis 3</div>
+    //     <div class="basis-4 bg-green">Basis 4</div>
+    //     <div class="basis-3 bg-red">Basis 3</div>
+    //     <div class="basis-7 bg-light-blue">Basis 7</div>
+    //     <div class="basis-5 bg-light-gray">Basis 5</div>
+    //     <div class="button-group">
     //         <button>Buttons</button>
     //         <button>in a</button>
-    //         <button>flexrow</button>
+    //         <button>.button-group</button>
     //         <button>are spaced</button>
     //         <button>more</button>
     //         <button>narrowly</button>
     //     </div>
-    //     <div class="flexrow">
-    //         <div class="basis-4 bg-medium-blue">Basis 4</div>
-    //         <div class="basis-8 bg-orange">Basis 8</div>
-    //     </div>
-    //     <div class="flexrow">
-    //         <div class="bg-yellow">
-    //             <div class="text bg-gold">
-    //                 This is a <code>div.text</code> inside an ordinary div (no
-    //                 <code>basis</code>) inside a <code>div.flexrow</code>.
-    //             </div>
+    //     <div class="basis-4 bg-medium-blue">Basis 4</div>
+    //     <div class="basis-8 bg-orange">Basis 8</div>
+    //     <div class="bg-yellow">
+    //         <div class="text bg-gold">
+    //             This is a <code>div.text</code> inside an ordinary div (no
+    //             <code>basis</code>) inside another <code>div</code>.
     //         </div>
     //     </div>
     // </div>
     //
-    // Styleguide: Layout.FlexRow
+    // Styleguide: Layout.Grid
 
     // Grid System
-    @for $b from 2 through 12 {
-        .basis-#{$b} {
-            @extend %griditem;
-            @extend %basis-#{$b};
-        }
-    }
+    @include bases('.basis-');
 
-    // Form FlexRow
+    // Form Layout
     //
-    // In forms, flexrows are spaced further apart, while their contents are closer
-    // together.
+    // A form is a grid whose rows are spaced further apart, while their
+    // contents are closer together.
     //
     // Markup:
     // <div class="content">
     //     <form>
-    //         <div class="flexrow">
-    //             <div class="control-group basis-6">
-    //                 <label class="field-label">Field Label</label>
-    //                 <input placeholder="In a form, flexrow spacing is tighter">
-    //             </div>
-    //             <div class="control-group basis-6">
-    //                 <label class="field-label">Field Label</label>
-    //                 <input placeholder="In a form, flexrow spacing is tighter" pattern="g" required>
-    //                 <div class="invalid-message">Message is placed absolutely</div>
-    //             </div>
+    //         <div class="control-group basis-6">
+    //             <label class="field-label">Field Label</label>
+    //             <input placeholder="In a form, row spacing is tighter">
     //         </div>
-    //         <div class="flexrow">
-    //             <button class="basis-4">That is why</button>
-    //             <button class="basis-4">Buttons</button>
-    //             <button class="basis-4">Are close-spaced</button>
+    //         <div class="control-group basis-6">
+    //             <label class="field-label">Field Label</label>
+    //             <input placeholder="In a form, row spacing is tighter" pattern="g" required>
+    //             <div class="invalid-message">Message is placed absolutely</div>
     //         </div>
-    //         <div class="flexrow">
-    //             <div class="basis-4 bg-blue">Some text</div>
-    //             <div class="basis-4 bg-gray">Some text</div>
-    //             <div class="basis-4 bg-gold">Some text</div>
-    //         </div>
-    //         <div class="flexrow">
-    //             <textarea rows="4">Here is a textarea</textarea>
-    //         </div>
+    //         <button class="basis-4">That is why</button>
+    //         <button class="basis-4">Buttons</button>
+    //         <button class="basis-4">Are close-spaced</button>
+    //         <div class="basis-4 bg-blue">Some text</div>
+    //         <div class="basis-4 bg-gray">Some text</div>
+    //         <div class="basis-4 bg-gold">Some text</div>
+    //         <textarea rows="4">Here is a textarea</textarea>
     //     </form>
     // </div>
     //
-    // Styleguide: Layout.FlexRow.Form
+    // Styleguide: Layout.Grid.Form
 
     // Control Group
     //
@@ -259,19 +234,15 @@ form,
     // Markup:
     // <div class="content">
     //     <form>
-    //         <div class="flexrow">
-    //             <div class="control-group basis-12">
-    //                 <label class="field-label">Field Label</label>
-    //                 <input placeholder="Placeholder text" pattern="g" required>
-    //                 <div class="invalid-message">Enter a g</div>
-    //             </div>
+    //         <div class="control-group basis-12">
+    //             <label class="field-label">Field Label</label>
+    //             <input placeholder="Placeholder text" pattern="g" required>
+    //             <div class="invalid-message">Enter a g</div>
     //         </div>
-    //         <div class="flexrow">
-    //             <div class="control-group basis-6">
-    //                 <label class="field-label">Field Label</label>
-    //                 <input class="delay-validation" placeholder="Invalid, but does not show" pattern="g" required>
-    //                 <div class="invalid-message">Enter a g</div>
-    //             </div>
+    //         <div class="control-group basis-6">
+    //             <label class="field-label">Field Label</label>
+    //             <input class="delay-validation" placeholder="Invalid, but does not show" pattern="g" required>
+    //             <div class="invalid-message">Enter a g</div>
     //         </div>
     //     </form>
     // </div>
@@ -491,36 +462,36 @@ textarea {
 // ```
 //
 // Markup:
-    // <div class="modal">
-    //     <div class="heading">
-    //         Modal header
-    //         <i class="close-icon">&times;</i>
-    //     </div>
-    //     <p>
-    //         Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-    //         eiusmod tempor incididunt ut labore et dolore magna liqua. Ut
-    //         enim ad minim veniam, quis nostrud exercitation ullamco laboris
-    //         nisi ut aliquip ex ea commodo consequat.
-    //     </p>
-    //     <div class="flexrow">
-    //         <button type="button" class="primary">Primary action</button>
-    //         <button type="button">Default</button>
-    //     </div>
-    // </div>
-    // <hr>
-    // <div class="modal error">
-    //     <div class="heading">
-    //         <i class="error-icon">!</i>
-    //         Error heading
-    //     </div>
-    //     <p>
-    //       Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-    //       eiusmod tempor incididunt ut labore et dolore magna liqua. Ut
-    //       enim ad minim veniam, quis nostrud exercitation ullamco laboris
-    //       nisi ut aliquip ex ea commodo consequat.
-    //     </p>
-    //     <div><a href="https://packages.cnx.org/pattern-library/latest/">Link text</a></div>
-    // </div>
+// <div class="modal">
+//     <div class="heading">
+//         Modal header
+//         <i class="close-icon">&times;</i>
+//     </div>
+//     <p>
+//         Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+//         eiusmod tempor incididunt ut labore et dolore magna liqua. Ut
+//         enim ad minim veniam, quis nostrud exercitation ullamco laboris
+//         nisi ut aliquip ex ea commodo consequat.
+//     </p>
+//     <div class="button-group">
+//         <button type="button" class="primary">Primary action</button>
+//         <button type="button">Default</button>
+//     </div>
+// </div>
+// <hr>
+// <div class="modal error">
+//     <div class="heading">
+//         <i class="error-icon">!</i>
+//         Error heading
+//     </div>
+//     <p>
+//       Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+//       eiusmod tempor incididunt ut labore et dolore magna liqua. Ut
+//       enim ad minim veniam, quis nostrud exercitation ullamco laboris
+//       nisi ut aliquip ex ea commodo consequat.
+//     </p>
+//     <div><a href="https://packages.cnx.org/pattern-library/latest/">Link text</a></div>
+// </div>
 //
 // Styleguide: Messages.Modal dialogs
 

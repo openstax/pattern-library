@@ -45,14 +45,9 @@ $tablet-max: 96em * $scale-factor;
     width: 100%;
 }
 
-@mixin flex-layout-container($justify: center) {
-    display: flex;
-    flex: 0 0 100%;
-    flex-flow: row wrap;
-    justify-content: $justify;
-}
-
-@mixin content {
+// %content and %text-content should be used via @extend because of the nesting
+// rule, so there is no mixin
+%content {
     @include layout-container($content-max);
 
     %content {
@@ -60,11 +55,7 @@ $tablet-max: 96em * $scale-factor;
     }
 }
 
-%content {
-    @include content;
-}
-
-@mixin text-content {
+%text-content {
     @include layout-container($text-content-max);
 
     %content,
@@ -73,70 +64,80 @@ $tablet-max: 96em * $scale-factor;
     }
 }
 
-%text-content {
-    @include text-content;
-}
-
 // .basis-# defines a cell in the row
 // At phone size, all are 100% width
 // At tablet, .basis-2 thru .basis-6 are 50%, others still 100%
 // At desktop, .basis-n is n/12 of the row
-@mixin bases-with-margin($margin) {
+@mixin bases($prefix) {
     @for $b from 2 through 12 {
-        &%basis-#{$b} {
-            @if ($b < 7) {
-                @include wider-than($phone-max) {
-                    flex-basis: calc(50% - #{$margin});
+        #{$prefix}#{$b} {
+            grid-column: auto / span 1;
+            margin: 0;
+
+            @if ($b > 6) {
+                @include width-between($phone-max, $tablet-max) {
+                    grid-column: auto / span 2;
                 }
             }
 
             @include wider-than($tablet-max) {
-                flex-basis: calc(#{100% * $b / 12} + #{$margin * $b / 6 - 2 * $margin});
+                grid-column: auto / span $b;
             }
         }
     }
 }
 
-@mixin griditem($margin) {
-    display: block;
-    margin-left: 0;
-    margin-right: 2 * $margin;
-    flex-basis: 100%;
+@mixin grid {
+    display: grid;
+    grid-gap: 1rem 3rem;
+    grid-template-columns: 1fr;
 
-    @include bases-with-margin($margin);
-
-    @include width-up-to($phone-max) {
-        margin-right: 0;
+    @include width-between($phone-max, $tablet-max) {
+        grid-template-columns: repeat(2, 1fr);
     }
 
     @include wider-than($tablet-max) {
-        &:last-child {
-            margin-right: 0;
+        grid-template-columns: repeat(12, 1fr);
+    }
+
+    > * {
+        grid-column: 1 / 1;
+
+        @include width-between($phone-max, $tablet-max) {
+            grid-column-end: 3;
+        }
+
+        @include wider-than($tablet-max) {
+            grid-column-end: 13;
         }
     }
 }
 
-%griditem {
-    @include griditem($normal-margin);
-
-    // If this is in the mixin, it overrides the setting in %form, below
-    margin-bottom: 1rem;
-}
-
-%tightrow > %griditem {
-    @include griditem($tight-margin);
-}
-
-@mixin form() {
+@mixin form {
     @include layout-container($text-content-max);
-    @include flex-layout-container();
+    @include grid;
 
     background-color: ui-color(form-bg);
+    grid-gap: 5rem 1rem;
     padding: 4rem;
+}
 
-    %griditem {
-        margin-bottom: 5rem;
+@mixin tight-row {
+    display: grid;
+    grid-gap: 1rem;
+    grid-template-columns: 1fr;
+
+    @include width-between($phone-max, $tablet-max) {
+        grid-template-columns: 1fr 1fr;
     }
+
+    @include wider-than($tablet-max) {
+        grid-template-columns: repeat(auto-fit, minmax(10rem, auto));
+    }
+}
+
+%tight-row {
+    @include tight-row;
 }
 
 %form {
