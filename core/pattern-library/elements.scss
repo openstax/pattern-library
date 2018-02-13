@@ -7,7 +7,6 @@ html {
 }
 
 body {
-    // @extend %text-body-regular;
     @include set-font(body-regular);
 
     background-color: ui-color(page-bg);
@@ -52,24 +51,20 @@ h1 {
 }
 
 .hero h1 {
-    // @extend %text-hero-h1;
     @include set-font(hero-h1);
 }
 
 h2 {
-    // @extend %text-h2;
     @include set-font(h2);
     margin-top: 2rem;
 }
 
 h3 {
-    // @extend %text-h3;
     @include set-font(h3);
     margin-top: 1.5rem;
 }
 
 h4 {
-    // @extend %text-h4;
     @include set-font(h4);
     margin-top: 1rem;
 }
