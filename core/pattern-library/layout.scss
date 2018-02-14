@@ -87,7 +87,7 @@ $tablet-max: 96em * $scale-factor;
     }
 }
 
-@mixin grid {
+@mixin grid() {
     display: grid;
     grid-gap: 1rem 3rem;
     grid-template-columns: 1fr;
@@ -113,16 +113,16 @@ $tablet-max: 96em * $scale-factor;
     }
 }
 
-@mixin form {
+@mixin form() {
     @include layout-container($text-content-max);
-    @include grid;
+    @include grid();
 
     background-color: ui-color(form-bg);
     grid-gap: 5rem 1rem;
     padding: 4rem;
 }
 
-@mixin tight-row {
+@mixin tight-row() {
     display: grid;
     grid-gap: 1rem;
     grid-template-columns: 1fr;
@@ -137,11 +137,11 @@ $tablet-max: 96em * $scale-factor;
 }
 
 %tight-row {
-    @include tight-row;
+    @include tight-row();
 }
 
 %form {
-    @include form;
+    @include form();
 }
 
 // A container that centers content horizontally and vertically

@@ -4,12 +4,12 @@
 
 $form-border-width: 0.1rem;
 
-@mixin form-border {
+@mixin form-border() {
     border: $form-border-width solid ui-color(form-border);
 }
 
 @mixin button-basic() {
-    @include center;
+    @include center();
     @include set-font(body-regular);
 
     // Large button is the default
@@ -42,7 +42,7 @@ $form-border-width: 0.1rem;
 
 @mixin button-type-specific($type: default) {
     @if ($type == default) {
-        @include form-border;
+        @include form-border();
 
         border-radius: 0.2rem;
         color: text-color(normal);
@@ -66,8 +66,8 @@ $form-border-width: 0.1rem;
     }
 }
 
-@mixin button {
-    @include button-basic;
+@mixin button() {
+    @include button-basic();
     @include button-type-specific(default);
 
     &%primary {
@@ -80,11 +80,11 @@ $form-border-width: 0.1rem;
 }
 
 %button {
-    @include button;
+    @include button();
 }
 
-@mixin button-bar {
-    @include form-border;
+@mixin button-bar() {
+    @include form-border();
 
     align-items: baseline;
     border-radius: 0.2rem;
@@ -124,7 +124,7 @@ $form-border-width: 0.1rem;
 }
 
 %button-bar {
-    @include button-bar;
+    @include button-bar();
 
     > %selected {
         @include button-bar-selected();
@@ -133,7 +133,7 @@ $form-border-width: 0.1rem;
 
 @mixin non-button-input() {
     @include set-font(body-regular);
-    @include form-border;
+    @include form-border();
     background-color: ui-color(white);
     box-sizing: border-box;
     color: text-color(normal);
@@ -143,7 +143,7 @@ $form-border-width: 0.1rem;
 
     &:focus {
         border: thin solid os-color(light-blue);
-        box-shadow: 0 0 4px 0 rgba(os-color(light-blue), 0.5);
+        box-shadow: 0 0 0.4rem 0 rgba(os-color(light-blue), 0.5);
         outline: none;
     }
 
@@ -171,7 +171,7 @@ $form-border-width: 0.1rem;
 }
 
 %non-button-input {
-    @include non-button-input;
+    @include non-button-input();
 }
 
 @mixin tab-group() {
@@ -210,10 +210,10 @@ $form-border-width: 0.1rem;
 }
 
 %tab-group {
-    @include tab-group;
+    @include tab-group();
 }
 %tab-baseline {
-    @include tab-baseline;
+    @include tab-baseline();
 }
 
 %control-group {
@@ -250,7 +250,7 @@ $form-border-width: 0.1rem;
     }
 }
 
-@mixin message-box {
+@mixin message-box() {
     align-items: center;
     background-color: ui-color(success-bg);
     border: thin solid ui-color(success-border);
@@ -269,10 +269,10 @@ $form-border-width: 0.1rem;
 }
 
 %message-box {
-    @include message-box;
+    @include message-box();
 }
 
-@mixin modal {
+@mixin modal() {
     border: thin solid ui-color(form-border);
     box-shadow: 0 1rem 2rem 0 rgba(0, 0, 0, 0.2);
     display: block;
@@ -309,5 +309,5 @@ $form-border-width: 0.1rem;
 }
 
 %modal {
-    @include modal;
+    @include modal();
 }

@@ -1,24 +1,29 @@
 files:
-  include: 'pattern-library/**/*.scss'
-  ignore: 'styleguide/**/*.scss'
+  include: 'core/**/*.scss'
+  ignore:
+    - 'styleguide/**/*.scss'
+    - 'node_modules/**/*.scss'
 options:
   formatter: stylish
   merge-default-rules: false
 rules:
+  empty-args:
+    - 2
+    - include: true
   indentation:
-    - 1
+    - 2
     - size: 4
   leading-zero:
-    - 1
+    - 2
     - include: true
   nesting-depth:
-    - 1
+    - 2
     - max-depth: 6
   no-color-keywords: 0
   no-color-literals: 0
   no-css-comments: 0
   property-units:
-    - 1
+    - 2
     - global:
         - em
         - rem

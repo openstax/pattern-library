@@ -129,15 +129,15 @@ p {
 // In a form, flexrow spacing is different
 form,
 .form {
-    @include form;
+    @include form();
 }
 
 .grid {
-    @include grid;
+    @include grid();
 }
 
 .button-group {
-    @include tight-row;
+    @include tight-row();
 
     max-width: 100%;
 }
@@ -341,7 +341,7 @@ button,
 //
 // Styleguide: Layout.Tabs
 .tab-group {
-    @include tab-group;
+    @include tab-group();
 
     .tab {
         @extend %tab;
@@ -354,7 +354,7 @@ button,
 }
 
 .tab-baseline {
-    @include tab-baseline;
+    @include tab-baseline();
 }
 
 // Form
@@ -374,7 +374,7 @@ button,
 %content form,
 form%content,
 .form {
-    @include form;
+    @include form();
 }
 
 label {
@@ -394,7 +394,7 @@ input {
 
 input:not([type="button"]):not([type="submit"]):not([type="reset"]):not([type="image"]):not([type="radio"]):not([type="checkbox"]),
 textarea {
-    @include non-button-input;
+    @include non-button-input();
 
     .invalid-message {
         @extend %invalid-message;
@@ -416,7 +416,7 @@ textarea {
 // Styleguide: Form Elements.Button Bar
 
 .button-bar {
-    @include button-bar;
+    @include button-bar();
 
     > [aria-selected="true"] {
         @extend %selected;
@@ -437,7 +437,7 @@ textarea {
 // Styleguide: Messages.Confirmation boxes
 
 .message-box {
-    @include message-box;
+    @include message-box();
 
     &.error {
         @extend %error;
@@ -491,5 +491,5 @@ textarea {
 // Styleguide: Messages.Modal dialogs
 
 .modal {
-    @include modal;
+    @include modal();
 }
