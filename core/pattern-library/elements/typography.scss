@@ -1,0 +1,86 @@
+// Headings
+//
+// Each heading size has a placeholder selector, so you can use, e.g.,
+// <code>
+// @extend %text-h1;
+// </code>
+// to apply h1-style font to some other element type.
+//
+// Markup:
+// <div class="{{modifier_class}}">
+//     <div class="hero"><h1>H1 in a hero (%text-hero-h1)</h1></div>
+//     <h1>H1 heading (%text-h1)</h1>
+//     <h2>H2 heading (%text-h2)</h2>
+//     <h3>H3 heading (%text-h3)</h3>
+//     <h4>H4 heading (%text-h4)</h4>
+// </div>
+//
+// .tutor - if enclosed in a `.tutor`, uses OpenStax Tutor typography. Recommend
+// putting this class on the `body` element.
+//
+// Styleguide: Typography.Headings
+
+h1,
+h2,
+h3,
+h4 {
+    margin-bottom: 1rem;
+}
+
+// These should be @extend %text-h1, etc., but that causes SASS to duplicated
+// lots of stuff.
+h1 {
+    @include set-font(h1);
+}
+
+.hero h1 {
+    @include set-font(hero-h1);
+}
+
+h2 {
+    @include set-font(h2);
+    margin-top: 2rem;
+}
+
+h3 {
+    @include set-font(h3);
+    margin-top: 1.5rem;
+}
+
+h4 {
+    @include set-font(h4);
+    margin-top: 1rem;
+}
+
+.tutor {
+    @extend %tutor;
+}
+
+// Copy
+//
+// Markup:
+// <div class="{{modifier_class}}">This is some copy</div>
+//
+// .copy-large - larger copy
+//
+// Styleguide: Typography.Copy
+
+.copy-large {
+    @include set-font(body-large);
+}
+
+// Links
+//
+// Text shades slightly in `:hover` and `:active` states.
+// Separate elements inside links (think icon and text) will be separated by 7px.
+// To avoid separation, wrap them in a span.
+//
+// Markup:
+// Here is some <a href="#">Link text</a>
+// and some <a href="#"><i>icon</i>link text</a>
+//
+// Styleguide: Typography.Links
+
+a {
+    @include link();
+}

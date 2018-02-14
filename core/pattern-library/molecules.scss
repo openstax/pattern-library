@@ -93,7 +93,7 @@ $form-border-width: 0.1rem;
     padding: 0;
 
     > * {
-        @extend %button;
+        @include button();
 
         background-color: ui-color(white);
         border: 0;

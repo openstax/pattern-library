@@ -1,0 +1,101 @@
+// Buttons
+//
+// Subtle color changes on hover, focus, and active states
+//
+// Markup:
+// <button class="{{modifier_class}}">Native button</button>
+// <input type="button" class="{{modifier_class}}" value="input[type='button']"/>
+// <span class="btn {{modifier_class}}">Anything styled like a button</span>
+//
+// .medium - Less vertical padding
+// .small - Smaller font, less padding on all sides
+// .wide - The width of the enclosing container
+// .primary - Colored to stand out
+// .secondary - Colored to stand out a bit less than primary
+//
+// Styleguide: Form Elements.Buttons
+
+button,
+[type="button"],
+[type="submit"],
+[type="reset"],
+.btn {
+    // This actually reduces total code size
+    @extend %button;
+
+    &.primary,
+    &[type="submit"] {
+        @extend %primary;
+    }
+
+    &.secondary,
+    &[type="reset"] {
+        @extend %secondary;
+    }
+}
+
+// Form
+//
+// Forms get a slightly different background color and a healthy bit of padding to
+// set them off from other containers. These stylings only apply to `<form>` tags
+// that are inside `.content` or themselves have the `.content` class; use the
+// `.form` class to apply to anything else.
+//
+// Markup:
+// <div class="content">
+//     <form>A form container</form>
+//     <div class="form">A container styled the same</div>
+// </div>
+//
+// Styleguide: Form Elements.Form
+%content form,
+form%content,
+.form {
+    @include form();
+}
+
+label {
+    @include set-font(helper-label);
+
+    color: text-color(helper);
+    width: 100%;
+
+    > * {
+        display: block;
+    }
+}
+
+input {
+    height: $form-element-height;
+}
+
+input:not([type="button"]):not([type="submit"]):not([type="reset"]):not([type="image"]):not([type="radio"]):not([type="checkbox"]),
+textarea {
+    @include non-button-input();
+
+    .invalid-message {
+        @extend %invalid-message;
+    }
+}
+
+// Button Bar
+//
+// A row of buttons or button-styled elements used like a radio group
+//
+// Markup:
+// <div class="button-bar">
+//     <button>Option 1</button>
+//     <button aria-selected="true">Option 2</button>
+//     <div class="btn">Option 3</div>
+//     <input type="button" value="Option 4">
+// </div>
+//
+// Styleguide: Form Elements.Button Bar
+
+.button-bar {
+    @include button-bar();
+
+    > [aria-selected="true"] {
+        @extend %selected;
+    }
+}
