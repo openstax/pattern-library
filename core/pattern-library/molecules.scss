@@ -18,7 +18,7 @@ $form-border-width: 0.1rem;
     display: inline-flex;
     height: $form-element-height;
     margin: 0;
-    padding: 0 2 * $normal-margin;
+    padding: 0 (2 * $normal-margin);
     text-decoration: none;
     user-select: none;
     white-space: nowrap; // Because height is set, no room for wrapped text
@@ -285,7 +285,7 @@ $form-border-width: 0.1rem;
         background-color: ui-color(default);
         margin-bottom: $normal-margin;
         min-height: 1.5rem; // 7.5 - 6 for padding
-        padding: 2 * $normal-margin;
+        padding: (2 * $normal-margin);
 
         .close-icon {
             font-size: 2.2rem;
