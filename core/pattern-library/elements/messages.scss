@@ -1,0 +1,69 @@
+// Confirmation boxes
+//
+//
+//
+// Markup:
+// <div class="content">
+//     <div class="message-box">Success message</div>
+//     <div class="message-box error">Error message</div>
+// </div>
+//
+// Styleguide: Messages.Confirmation boxes
+
+.message-box {
+    @include message-box();
+
+    &.error {
+        @extend %error;
+    }
+}
+
+// Modal dialogs
+//
+// Font-awesome icons should be used, but are not available to this demo page.
+// Modals should additionally have
+// ```
+// position: fixed;
+// left: 50%;
+// top: 50%;
+// transform: translate(-50%, -50%);
+// z-index: _some high number_;
+// ```
+//
+// Markup:
+// <div class="modal">
+//     <div class="heading">
+//         Modal header
+//         <i class="close-icon">&times;</i>
+//     </div>
+//     <p>
+//         Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+//         eiusmod tempor incididunt ut labore et dolore magna liqua. Ut
+//         enim ad minim veniam, quis nostrud exercitation ullamco laboris
+//         nisi ut aliquip ex ea commodo consequat.
+//     </p>
+//     <div class="button-group">
+//         <button type="button" class="primary">Primary action</button>
+//         <button type="button">Default</button>
+//     </div>
+// </div>
+// <hr>
+// <div class="modal error">
+//     <div class="heading">
+//         <i class="error-icon">!</i>
+//         Error heading
+//     </div>
+//     <p>
+//       Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+//       eiusmod tempor incididunt ut labore et dolore magna liqua. Ut
+//       enim ad minim veniam, quis nostrud exercitation ullamco laboris
+//       nisi ut aliquip ex ea commodo consequat.
+//     </p>
+//     <div><a href="https://packages.cnx.org/pattern-library/latest/">Link text</a></div>
+// </div>
+//
+// Styleguide: Messages.Modal dialogs
+
+.modal {
+    @include modal();
+}

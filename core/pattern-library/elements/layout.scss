@@ -1,0 +1,207 @@
+// Content
+//
+// Apart from decorative elements, all content should be in a `.content` container,
+// which constrains it to the middle column of the screen on wide screens. `.content`
+// also includes padding to make "gutters" in a region, so that its content will not
+// be flush against the edge. Multiple layers of `.content` do not add multiple layers
+// of gutters.<br>
+// The examples below have a blue-background `.content` block.
+//
+// Markup:
+//     <div class="content {{modifier_class}} bg-blue">
+//         <p>
+//              Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
+//              incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis
+//              nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+//              Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu
+//              fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in
+//              culpa qui officia deserunt mollit anim id est laborum.
+//          </p>
+//          <p>
+//               Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
+//               incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis
+//               nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+//               Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu
+//               fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in
+//               culpa qui officia deserunt mollit anim id est laborum.
+//           </p>
+//     </div>
+//
+// .text - Narrows the block to the maximum width allowed for single-column text.
+// The class can be applied to the `.content` block or inside it. It is applied to the
+// blue `.content` block here. As you can see from the above example, paragraphs (`<p>`)
+// are always constrained to the single-column text maximum width.
+//
+// Styleguide: Layout.Content
+
+// Page content is constrained to the middle of the screen
+.text,
+p {
+    @extend %text-content;
+}
+
+// In a form, flexrow spacing is different
+form,
+.form {
+    @include form();
+}
+
+.grid {
+    @include grid();
+}
+
+.button-group {
+    @include tight-row();
+
+    max-width: 100%;
+}
+
+.content {
+    @extend %content;
+
+    // Grid layout
+    //
+    // Adding the `.grid` class to a container sets it up as a 12-column grid for
+    // desktop displays, a 2-column grid for tablets, and a 1-column grid for phone.
+    // Contents by default will be 100% of the grid width. Adding a class of `basis-2`
+    // makes the item 2 columns wide, `basis-3` makes it 3 columns wide, etc.
+    //
+    // There is no row element. The items will wrap as necessary. Buttons should be
+    // put into a `.button-group`, which will space them closer together. You will
+    // need to ensure that the buttons fit narrow desktop screens. Buttons that are
+    // naturally wider than 10rem may get too small for their contents.
+    //
+    // Markup:
+    // <div class="content grid">
+    //     <div class="basis-2 bg-blue">Basis 2</div>
+    //     <div class="basis-10 bg-gold">Basis 10</div>
+    //     <div class="basis-2 bg-deep-green">Basis 2<br>extra-tall</div>
+    //     <div class="basis-3 bg-gray">Basis 3</div>
+    //     <div class="basis-4 bg-green">Basis 4</div>
+    //     <div class="basis-3 bg-red">Basis 3</div>
+    //     <div class="basis-7 bg-light-blue">Basis 7</div>
+    //     <div class="basis-5 bg-light-gray">Basis 5</div>
+    //     <div class="button-group">
+    //         <button>Buttons</button>
+    //         <button>in a</button>
+    //         <button>.button-group</button>
+    //         <button>are spaced</button>
+    //         <button>more</button>
+    //         <button>narrowly</button>
+    //     </div>
+    //     <div class="basis-4 bg-medium-blue">Basis 4</div>
+    //     <div class="basis-8 bg-orange">Basis 8</div>
+    //     <div class="bg-yellow">
+    //         <div class="text bg-gold">
+    //             This is a <code>div.text</code> inside an ordinary div (no
+    //             <code>basis</code>) inside another <code>div</code>.
+    //         </div>
+    //     </div>
+    // </div>
+    //
+    // Styleguide: Layout.Grid
+
+    // Grid System
+    @include bases('.basis-');
+
+    // Form Layout
+    //
+    // A form is a grid whose rows are spaced further apart, while their
+    // contents are closer together.
+    //
+    // Markup:
+    // <div class="content">
+    //     <form>
+    //         <div class="control-group basis-6">
+    //             <label class="field-label">Field Label</label>
+    //             <input placeholder="In a form, row spacing is tighter">
+    //         </div>
+    //         <div class="control-group basis-6">
+    //             <label class="field-label">Field Label</label>
+    //             <input placeholder="In a form, row spacing is tighter" pattern="g" required>
+    //             <div class="invalid-message">Message is placed absolutely</div>
+    //         </div>
+    //         <button class="basis-4">That is why</button>
+    //         <button class="basis-4">Buttons</button>
+    //         <button class="basis-4">Are close-spaced</button>
+    //         <div class="basis-4 bg-blue">Some text</div>
+    //         <div class="basis-4 bg-gray">Some text</div>
+    //         <div class="basis-4 bg-gold">Some text</div>
+    //         <textarea rows="4">Here is a textarea</textarea>
+    //     </form>
+    // </div>
+    //
+    // Styleguide: Layout.Grid.Form
+
+    // Control Group
+    //
+    // Optional containers `.field-label` and `.invalid-message`<br>
+    // `.field-label` *must not* enclose the input element, so if you are wrapping
+    // the input element in a `label`, put the text in a `span.field-label`.
+    // Add `delay-validation` class to avoid showing validation state
+    //
+    // Markup:
+    // <div class="content">
+    //     <form>
+    //         <div class="control-group basis-12">
+    //             <label class="field-label">Field Label</label>
+    //             <input placeholder="Placeholder text" pattern="g" required>
+    //             <div class="invalid-message">Enter a g</div>
+    //         </div>
+    //         <div class="control-group basis-6">
+    //             <label class="field-label">Field Label</label>
+    //             <input class="delay-validation" placeholder="Invalid, but does not show" pattern="g" required>
+    //             <div class="invalid-message">Enter a g</div>
+    //         </div>
+    //     </form>
+    // </div>
+    //
+    // Styleguide: Form Elements.Control Group
+
+    // Lays out form element with field-label and invalid-message (each optional)
+    .control-group {
+        @extend %control-group;
+
+        .field-label {
+            @extend %field-label;
+        }
+
+        .invalid-message {
+            @extend %invalid-message;
+        }
+    }
+
+}
+
+// Tabs
+//
+// Tabs are headers of ordinary text color and size in a `.tab-group`
+// The active tab has a green border-bottom.
+//
+// Markup:
+// <div class="content">
+//     <div class="tab-group">
+//         <div class="tab active">Section 1</div>
+//         <div class="tab">Section 2</div>
+//         <div class="tab">Section 3</div>
+//     </div>
+//     <hr class="tab-baseline">
+// </div>
+//
+// Styleguide: Layout.Tabs
+.tab-group {
+    @include tab-group();
+
+    .tab {
+        @extend %tab;
+
+        &.active,
+        &.selected {
+            @extend %active;
+        }
+    }
+}
+
+.tab-baseline {
+    @include tab-baseline();
+}

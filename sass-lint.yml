@@ -1,0 +1,35 @@
+files:
+  include: 'core/**/*.scss'
+  ignore:
+    - 'styleguide/**/*.scss'
+    - 'node_modules/**/*.scss'
+options:
+  formatter: stylish
+  merge-default-rules: false
+rules:
+  empty-args:
+    - 2
+    - include: true
+  indentation:
+    - 2
+    - size: 4
+  leading-zero:
+    - 2
+    - include: true
+  nesting-depth:
+    - 2
+    - max-depth: 6
+  no-color-keywords: 0
+  no-color-literals: 0
+  no-css-comments: 0
+  property-units:
+    - 2
+    - global:
+        - em
+        - rem
+        - '%'
+        - vw
+        - vh
+        - vmin
+        - vmax
+        - s
