@@ -238,6 +238,7 @@ $form-border-width: 0.1rem;
 }
 
 @mixin link() {
+    align-items: baseline;
     color: text-color(link);
     display: inline-grid;
     grid-auto-flow: column;
