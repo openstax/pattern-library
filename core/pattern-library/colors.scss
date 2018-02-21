@@ -44,7 +44,8 @@ $ui-colors: (
     success-bg: #d6f1f7,
     success-border: #0064a0,
     success-fg: #0064a0,
-    white: #fff
+    white: #fff,
+    black: #000
 );
 
 @function get-color($map, $key) {
