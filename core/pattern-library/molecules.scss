@@ -188,13 +188,14 @@ $form-border-width: 0.1rem;
         display: inline-flex;
         justify-content: center;
         margin-bottom: 0;
-        padding: 5rem $normal-margin 0.3rem;
+        padding: 3rem $normal-margin 0.3rem;
 
-        &:hover {
-            border-bottom: 0.4rem solid lighten(os-color(green), 50%);
+        @include wider-than($tablet-max) {
+            padding: 5rem 4rem 0.3rem;
         }
 
-        &%active {
+        &%active,
+        &:hover {
             border-bottom: 0.4rem solid os-color(green);
         }
     }
