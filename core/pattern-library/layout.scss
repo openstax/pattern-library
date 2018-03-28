@@ -120,6 +120,11 @@ $tablet-max: 96em * $scale-factor;
     background-color: ui-color(form-bg);
     grid-gap: 5rem 1rem;
     padding: 4rem;
+
+    @include width-up-to($phone-max) {
+        padding-left: 0;
+        padding-right: 0;
+    }
 }
 
 @mixin tight-row() {
