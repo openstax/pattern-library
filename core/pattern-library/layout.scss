@@ -156,3 +156,22 @@ $tablet-max: 96em * $scale-factor;
     justify-content: center;
     text-align: center;
 }
+
+// A rounded-cornered container with a drop shadow
+$card-shadow: 0 2px 6px 0 rgba(ui-color(black), 0.25);
+$card-shadow-hover: 0 8px 20px 0 rgba(ui-color(black), 0.25);
+@mixin card() {
+    border: 0;
+    border-radius: 0.4rem;
+    box-shadow: $card-shadow;
+
+    @include wider-than($tablet-max) {
+        &:hover {
+            box-shadow: $card-shadow-hover;
+        }
+    }
+}
+
+%card {
+    @include card();
+}
