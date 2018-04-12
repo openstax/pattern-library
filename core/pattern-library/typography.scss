@@ -9,18 +9,29 @@ $font-specs: (
     helper-label: 1.4rem 2rem
 );
 
+@mixin title-font($size) {
+    font-size: $size;
+    font-weight: bold;
+    letter-spacing: -0.04 * $size;
+    line-height: normal;
+}
+
+@mixin body-font($size) {
+    font-size: $size;
+    font-weight: normal;
+    letter-spacing: normal;
+    line-height: normal;
+}
+
 @mixin set-font($name) {
     $spec: map-get($font-specs, $name);
-    font-size: nth($spec, 1);
-    line-height: nth($spec, 2);
     @if (length($spec) > 2 and nth($spec, 3)) {
-        font-weight: bold;
-        letter-spacing: -0.04 * nth($spec, 1);
+        @include title-font(nth($spec, 1));
     }
     @else {
-        font-weight: normal;
-        letter-spacing: normal;
+        @include body-font(nth($spec, 1));
     }
+    line-height: nth($spec, 2);
 }
 
 // Create %text-hero-h1, etc placeholders

@@ -188,13 +188,14 @@ $form-border-width: 0.1rem;
         display: inline-flex;
         justify-content: center;
         margin-bottom: 0;
-        padding: 5rem $normal-margin 0.3rem;
+        padding: 3rem $normal-margin 0.3rem;
 
-        &:hover {
-            border-bottom: 0.4rem solid lighten(os-color(green), 50%);
+        @include wider-than($tablet-max) {
+            padding: 5rem 4rem 0.3rem;
         }
 
-        &%active {
+        &%active,
+        &:hover {
             border-bottom: 0.4rem solid os-color(green);
         }
     }
@@ -238,6 +239,7 @@ $form-border-width: 0.1rem;
 }
 
 @mixin link() {
+    align-items: baseline;
     color: text-color(link);
     display: inline-grid;
     grid-auto-flow: column;
@@ -274,7 +276,7 @@ $form-border-width: 0.1rem;
 
 @mixin modal() {
     border: thin solid ui-color(form-border);
-    box-shadow: 0 1rem 2rem 0 rgba(0, 0, 0, 0.2);
+    box-shadow: 0 1rem 2rem 0 rgba(ui-color(black), 0.2);
     display: block;
     flex-basis: 100%;
     max-width: 54rem;
