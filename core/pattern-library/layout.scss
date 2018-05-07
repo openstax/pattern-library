@@ -137,7 +137,7 @@ $tablet-max: 96em * $scale-factor;
     }
 
     @include wider-than($tablet-max) {
-        grid-template-columns: repeat(auto-fit, minmax(10rem, auto));
+        grid-template-columns: repeat(auto-fill, minmax(10rem, auto));
     }
 }
 
