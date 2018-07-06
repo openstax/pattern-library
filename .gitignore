@@ -3,3 +3,4 @@ styleguide/*
 *.css
 *.css.map
 .sass*
+*.lcov

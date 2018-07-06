@@ -1,0 +1,3 @@
+#!/bin/bash
+
+$(npm bin)/css-coverage --css ./styleguide/core/pattern-library.css --html styleguide/index.html --lcov ./css.lcov

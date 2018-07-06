@@ -5,6 +5,7 @@ notifications:
 script:
   - ./script/setup
   - ./script/build
+  - ./script/test
 after_script:
   # Report coverage to codecov
   - bash <(curl -s https://codecov.io/bash)

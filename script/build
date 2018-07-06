@@ -1,8 +1,8 @@
 #!/bin/bash
-node_modules/.bin/sass-lint -c sass-lint.yml -v -q || exit $?
+$(npm bin)/sass-lint -c sass-lint.yml -v -q || exit $?
 npm run kss
 mkdir -p styleguide/core
-node_modules/.bin/sass core/pattern-library.scss > styleguide/core/pattern-library.css
+$(npm bin)/sass core/pattern-library.scss > styleguide/core/pattern-library.css
 cat <<.
 Now load styleguide/index.html in your browser
 .

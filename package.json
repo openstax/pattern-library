@@ -23,6 +23,7 @@
     "kss": "node_modules/kss/bin/kss --config kss-config.json"
   },
   "dependencies": {
+    "css-coverage": "0.2.5",
     "node-sass": "^4.7.2"
   }
 }
