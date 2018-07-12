@@ -10,5 +10,5 @@ do_progress_quiet "Running tests" \
 if [[ $(command -v shellcheck) ]]; then
   # shellcheck disable=SC2046
   do_progress_quiet "Linting shell scripts" \
-    shellcheck $(find ./script -not -path '*/\.*' -mindepth 1 -maxdepth 1 -type f)
+    shellcheck $(find ./script  -mindepth 1 -maxdepth 1 -not -path '*/\.*' -type f)
 fi
