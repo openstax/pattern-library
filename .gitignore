@@ -3,3 +3,5 @@ styleguide/*
 *.css
 *.css.map
 .sass*
+*.lcov
+package-lock.json

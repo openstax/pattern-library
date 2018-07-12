@@ -1,0 +1,14 @@
+#!/bin/bash
+cd "$(dirname "$0")/.." || exit 111
+source ./script/bootstrap || exit 111
+
+do_progress_quiet "Running tests" \
+  npm run-script test
+
+
+# Validate the shell scripts
+if [[ $(command -v shellcheck) ]]; then
+  # shellcheck disable=SC2046
+  do_progress_quiet "Linting shell scripts" \
+    shellcheck $(find ./script  -mindepth 1 -maxdepth 1 -not -path '*/\.*' -type f)
+fi
