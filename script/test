@@ -1,3 +1,5 @@
 #!/bin/bash
+cd "$(dirname "$0")/.." || exit 111
+source ./script/bootstrap || exit 111
 
-$(npm bin)/css-coverage --css ./styleguide/core/pattern-library.css --html styleguide/index.html --lcov ./css.lcov
+try npm run-script test

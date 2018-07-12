@@ -20,6 +20,8 @@
     "sass-lint": "^1.12.1"
   },
   "scripts": {
+    "test": "css-coverage --css ./styleguide/core/pattern-library.css --html ./styleguide/index.html --lcov ./css.lcov",
+    "posttest": "sass-lint -c sass-lint.yml -v -q",
     "kss": "node_modules/kss/bin/kss --config kss-config.json"
   },
   "dependencies": {
