@@ -5,4 +5,3 @@ styleguide/*
 .sass*
 *.lcov
 package-lock.json
-.node-version
