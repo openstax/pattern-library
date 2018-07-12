@@ -8,6 +8,6 @@ do_progress_quiet "Running KSS to build styleguide" \
 try mkdir -p styleguide/core
 
 do_progress_quiet "Compiling SASS file for styleguide" \
-  $(npm bin)/sass ./core/pattern-library.scss ./styleguide/core/pattern-library.css
+  "$(npm bin)/sass" ./core/pattern-library.scss ./styleguide/core/pattern-library.css
 
 echo "Now load styleguide/index.html in your browser"
