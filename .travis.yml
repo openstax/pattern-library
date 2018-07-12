@@ -2,8 +2,9 @@ language: node_js
 sudo: false
 notifications:
   email: false
-script:
+install:
   - ./script/setup
+script:
   - ./script/build
   - ./script/test
 after_script:
