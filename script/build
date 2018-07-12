@@ -1,4 +1,6 @@
 #!/bin/bash
+cd "$(dirname "$0")/.." || exit 111
+
 $(npm bin)/sass-lint -c sass-lint.yml -v -q || exit $?
 npm run kss
 mkdir -p styleguide/core
