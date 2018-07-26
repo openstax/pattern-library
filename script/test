@@ -2,9 +2,13 @@
 cd "$(dirname "$0")/.." || exit 111
 source ./script/bootstrap || exit 111
 
-do_progress_quiet "Running tests" \
-  npm run-script test
-
+rm ./*.lcov
+for fn in styleguide/*.html; do
+  nodir=$(basename -- "$fn")
+  noext="${nodir%.*}"
+  do_progress_quiet "Testing $fn" \
+    npm run-script test2 -- --html "$fn" --lcov "./$noext.lcov" || echo "Failed in $noext"
+done
 
 # Validate the shell scripts
 if [[ $(command -v shellcheck) ]]; then

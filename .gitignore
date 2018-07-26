@@ -4,4 +4,5 @@ styleguide/*
 *.css.map
 .sass*
 *.lcov
+coverage
 package-lock.json
