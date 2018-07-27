@@ -559,9 +559,9 @@ cross-spawn@^5.0.1, cross-spawn@^5.1.0:
     shebang-command "^1.2.0"
     which "^1.2.9"
 
-css-coverage@1.1.0:
-  version "1.1.0"
-  resolved "https://registry.yarnpkg.com/css-coverage/-/css-coverage-1.1.0.tgz#c87d50859788be472c4b83504ac4e67dbfe39607"
+css-coverage@1.1.1:
+  version "1.1.1"
+  resolved "https://registry.yarnpkg.com/css-coverage/-/css-coverage-1.1.1.tgz#e057dd50a3cee16a3583060cc070461eb43b4942"
   dependencies:
     bunyan "^1.8.12"
     bunyan-format "^0.2.1"
