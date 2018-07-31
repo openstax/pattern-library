@@ -15,7 +15,7 @@
   "author": "Roy Johnson <roy.e.johnson@rice.edu>",
   "license": "AGPL-3.0",
   "devDependencies": {
-    "css-coverage": "1.0.0",
+    "css-coverage": "1.1.1",
     "kss": "^3.0.0-beta.18",
     "node-sass": "^4.9.2",
     "sass": "^1.0.0-beta.3",
@@ -23,6 +23,7 @@
   },
   "scripts": {
     "test": "css-coverage --css ./styleguide/core/pattern-library.css --html ./styleguide/index.html --lcov ./css.lcov",
+    "test2": "css-coverage --css ./styleguide/core/pattern-library.css",
     "posttest": "sass-lint -c sass-lint.yml -v -q",
     "kss": "node_modules/kss/bin/kss --config kss-config.json"
   }

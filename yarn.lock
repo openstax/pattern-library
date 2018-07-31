@@ -559,9 +559,9 @@ cross-spawn@^5.0.1, cross-spawn@^5.1.0:
     shebang-command "^1.2.0"
     which "^1.2.9"
 
-css-coverage@1.0.0:
-  version "1.0.0"
-  resolved "https://registry.yarnpkg.com/css-coverage/-/css-coverage-1.0.0.tgz#f2335c9106decf2481cc135317b078bcf18013ea"
+css-coverage@1.1.1:
+  version "1.1.1"
+  resolved "https://registry.yarnpkg.com/css-coverage/-/css-coverage-1.1.1.tgz#e057dd50a3cee16a3583060cc070461eb43b4942"
   dependencies:
     bunyan "^1.8.12"
     bunyan-format "^0.2.1"
@@ -571,7 +571,7 @@ css-coverage@1.0.0:
     phantomjs-prebuilt "2.1.16"
     puppeteer "^1.5.0"
     sizzle "2.3.3"
-    source-map "0.5.6"
+    source-map "0.7.3"
     standard "^11.0.1"
 
 css-tree@1.0.0-alpha25:
@@ -3143,9 +3143,9 @@ source-map-url@^0.4.0:
   version "0.4.0"
   resolved "https://registry.yarnpkg.com/source-map-url/-/source-map-url-0.4.0.tgz#3e935d7ddd73631b97659956d55128e87b5084a3"
 
-source-map@0.5.6:
-  version "0.5.6"
-  resolved "https://registry.yarnpkg.com/source-map/-/source-map-0.5.6.tgz#75ce38f52bf0733c5a7f0c118d81334a2bb5f412"
+source-map@0.7.3:
+  version "0.7.3"
+  resolved "https://registry.yarnpkg.com/source-map/-/source-map-0.7.3.tgz#5302f8169031735226544092e64981f751750383"
 
 source-map@^0.4.2, source-map@^0.4.4:
   version "0.4.4"

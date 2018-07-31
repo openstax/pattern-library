@@ -2,10 +2,7 @@
 //
 // Subtle color changes on hover, focus, and active states
 //
-// Markup:
-// <button class="{{modifier_class}}">Native button</button>
-// <input type="button" class="{{modifier_class}}" value="input[type='button']"/>
-// <span class="btn {{modifier_class}}">Anything styled like a button</span>
+// Markup: ./markup/form-elements-buttons.html
 //
 // .medium - Less vertical padding
 // .small - Smaller font, less padding on all sides
@@ -41,11 +38,7 @@ button,
 // that are inside `.content` or themselves have the `.content` class; use the
 // `.form` class to apply to anything else.
 //
-// Markup:
-// <div class="content">
-//     <form>A form container</form>
-//     <div class="form">A container styled the same</div>
-// </div>
+// Markup: ./markup/form-elements-form.html
 //
 // Styleguide: Form Elements.Form
 %content form,
@@ -82,13 +75,7 @@ textarea {
 //
 // A row of buttons or button-styled elements used like a radio group
 //
-// Markup:
-// <div class="button-bar">
-//     <button>Option 1</button>
-//     <button aria-selected="true">Option 2</button>
-//     <div class="btn">Option 3</div>
-//     <input type="button" value="Option 4">
-// </div>
+// Markup: ./markup/form-elements-button-bar.html
 //
 // Styleguide: Form Elements.Button Bar
 
