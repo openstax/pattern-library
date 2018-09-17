@@ -1,5 +1,6 @@
 node_modules
 styleguide/*
+coverage
 *.css
 *.css.map
 .sass*
