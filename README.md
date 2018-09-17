@@ -21,6 +21,7 @@ The files of interest in using the library are
  - `elements.scss`, which applies those stylings to particular classes and element types
 
  The visual reference for the Pattern Library is [here](https://sketchviewer.com/sketches/59766aabb57e8900114c89ce/latest/)
+ The documentation with kss examples is [here](https://packages.cnx.org/pattern-library/latest/)
 
 
 [travis-image]: https://img.shields.io/travis/openstax/pattern-library.svg

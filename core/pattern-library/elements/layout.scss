@@ -28,6 +28,20 @@ form,
     @include form();
 }
 
+// Card
+//
+// Adding the `.card` class to a container will cause it to display in a box
+// with a drop shadow activated on hover. Width, height, and padding will need to be
+// specified.
+//
+// Markup: ./markup/layout-card.html
+//
+// Styleguide: Layout.Card
+
+.card {
+    @extend %card;
+}
+
 .grid {
     @include grid();
 }
