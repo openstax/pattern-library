@@ -21,16 +21,18 @@ $tablet-max: 96em * $scale-factor;
     }
 }
 
+$one-pixel-in-em: 1em * $scale-factor * 0.1;
+
 // Excludes the given (max) width
 @mixin wider-than($width) {
-    @media (min-width: $width + 0.1) {
+    @media (min-width: $width + $one-pixel-in-em) {
         @content;
     }
 }
 
 // Includes the max width, excludes the min width
 @mixin width-between($width1, $width2) {
-    @media (min-width: $width1 + 0.1) and (max-width: $width2) {
+    @media (min-width: $width1 + $one-pixel-in-em) and (max-width: $width2) {
         @content;
     }
 }
