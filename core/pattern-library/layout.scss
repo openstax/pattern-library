@@ -177,3 +177,143 @@ $card-shadow-hover: 0 8px 20px 0 rgba(ui-color(black), 0.25);
 %card {
     @include card();
 }
+
+// The main menu for desktop
+$menu-highlight-border-width: 0.5rem;
+$menu-highlight-border: $menu-highlight-border-width solid os-color(green);
+%main-menu {
+    box-shadow: 0 0.1rem 0.3rem 0.2rem rgba(os-color(gray), 0.1);
+    height: 5.2rem;
+    width: 100%;
+
+    %content {
+        align-items: flex-start;
+        display: flex;
+        justify-content: space-between;
+    }
+
+    %logo-wrapper {
+        @include set-font(helper-label);
+
+        align-items: center;
+        display: grid;
+        grid-column-gap: 1rem;
+        grid-template-columns: min-content auto;
+        padding: 1.2rem 0.1rem;
+    }
+
+    %logo {
+        height: 2.8rem;
+
+        a {
+            height:100%;
+
+            &:active,
+            &:focus,
+            &:hover {
+                &::after {
+                    background-color: transparent;
+                    box-shadow: none;
+                }
+            }
+        }
+
+        img {
+            height: 100%;
+        }
+
+        %logo-color {
+            display: inline-block;
+        }
+    }
+
+    %nav-menu {
+        @include set-font(h4);
+
+        align-items: baseline;
+        display: flex;
+        flex-flow: row nowrap;
+        height: auto;
+        justify-content: flex-end;
+        list-style-type: none;
+        margin: 0;
+        overflow: visible;
+        padding: 0;
+
+        a {
+            text-decoration: none;
+        }
+
+        %nav-menu-item {
+            margin: $menu-highlight-border-width 1rem;
+            padding: 0 0.25rem;
+            white-space: nowrap;
+
+            &:not(%dropdown) > a {
+                color: os-color(gray);
+                display: inline-block;
+                padding: 1.2rem 0 0.6rem;
+
+                @at-root .transparent#{&} {
+                    color: text-color(white);
+                }
+
+                .chevron {
+                    fill: os-color(gray);
+                    height: 1.33rem;
+                    margin-left: 1rem;
+                    transform-origin: center;
+                    transform: rotate(90deg);
+                    width: 0.8rem;
+                }
+            }
+
+            %dropdown-menu {
+                @include set-font(body-regular);
+
+                display: none;
+
+                // inline-block allows width control
+                &[aria-expanded="true"] {
+                    background-color: ui-color(white);
+                    border-top: $menu-highlight-border;
+                    box-shadow: 0 0.5rem 0.5rem 0 rgba(black, 0.1);
+                    color: os-color(gray);
+                    display: block;
+                    height: auto;
+                    opacity: 1;
+                    padding: 1rem 0;
+                    transition: opacity 0.3s;
+                    width: auto;
+                }
+
+                a {
+                    color: os-color(gray);
+                    display: block;
+                    padding: 0.15rem 1rem;
+                }
+
+                a:focus,
+                a:hover {
+                    background-color: ui-color(default);
+                    color: text-color(normal);
+                }
+            }
+
+            &:hover:not(.dropdown) {
+                border-bottom: $menu-highlight-border;
+                margin-bottom: 0;
+            }
+        }
+
+        > :last-child {
+            margin-right: 0;
+            position: relative;
+
+            %dropdown-menu {
+                position: absolute;
+                right: -$normal-margin;
+            }
+        }
+    }
+}

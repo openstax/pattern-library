@@ -3,6 +3,7 @@
 @import 'elements/typography';
 @import 'elements/layout';
 @import 'elements/form-elements';
+@import 'elements/menus';
 @import 'elements/messages';
 
 @each $name, $spec in $os-colors {
