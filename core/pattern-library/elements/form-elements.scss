@@ -86,3 +86,34 @@ textarea {
         @extend %selected;
     }
 }
+
+// Input with tooltip
+//
+// A text input field with a tooltip that appears on focus or hover (selectable)
+// In mobile view, tooltip is below the field
+// In desktop view, tooltip is to the left
+// <p>Use macro <code>input-with-tooltip</code> on the wrapping element,<br>
+// <code>@extend %active</code> on the <code>input</code> to make the tooltip display<br>
+// <code>@extend %tooltip</code> on the tooltip element to style the tooltip itself</p>
+//
+// Markup: ./markup/form-elements-input-with-tooltip.html
+//
+// Styleguide: Form Elements.Input with Tooltip
+
+.input-with-tooltip {
+    @include input-with-tooltip();
+
+    input:focus {
+        @extend %active;
+    }
+
+    .tooltip {
+        @extend %tooltip;
+
+        max-width: 18rem;
+
+        @include width-up-to($phone-max) {
+            max-width: 100%;
+        }
+    }
+}
