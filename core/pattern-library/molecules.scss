@@ -170,6 +170,60 @@ $form-border-width: 0.1rem;
     @include non-button-input();
 }
 
+@mixin input-with-tooltip() {
+    position: relative;
+
+    %tooltip {
+        display: none;
+    }
+
+    $tooltip-size: 1.5rem;
+    %active + %tooltip {
+        background-color: ui-color(white);
+        border: thin solid ui-color(form-border);
+        border-radius: 0.2rem;
+        display: unset;
+        padding: 1rem 2rem;
+        position: absolute;
+
+        @include width-up-to($phone-max) {
+            left: 0;
+            top: 100%;
+            transform: translateY(#{$tooltip-size + 0.5rem});
+        }
+
+        @include wider-than($phone-max) {
+            left: 0;
+            top: 50%;
+            transform: translate(calc(-100% - #{$tooltip-size + 0.5rem}), -50%);
+        }
+
+        &::before {
+            background-color: inherit;
+            border-bottom: inherit;
+            border-right: inherit;
+            box-shadow: inherit;
+            content: "";
+            height: $tooltip-size;
+            position: absolute;
+            transform-origin: center;
+            width: $tooltip-size;
+
+            @include width-up-to($phone-max) {
+                left: calc(50%);
+                top: #{-$tooltip-size * 1.07};
+                transform: rotate(-135deg) translateY(-63%);
+            }
+
+            @include wider-than($phone-max) {
+                right: #{-$tooltip-size * 1.07};
+                top: 50%;
+                transform: rotate(-45deg) translateY(-63%);
+            }
+        }
+    }
+}
+
 @mixin tab-group() {
     border: 0;
     display: flex;
