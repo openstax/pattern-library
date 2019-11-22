@@ -1,6 +1,7 @@
 {
   "name": "pattern-library",
   "version": "1.1.12",
+  "_version_comment": "When new version, must also update `pattern-library.gemspec`.",
   "description": "SASS files implementing OpenStax pattern library conventions",
   "main": "index.js",
   "style": "core/pattern-library.scss",
