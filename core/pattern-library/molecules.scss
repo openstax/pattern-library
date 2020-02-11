@@ -185,14 +185,15 @@ $form-border-width: 0.1rem;
         display: unset;
         padding: 1rem 2rem;
         position: absolute;
+        z-index: 1;
 
-        @include width-up-to($phone-max) {
+        @include width-up-to($tablet-max) {
             left: 0;
             top: 100%;
             transform: translateY(#{$tooltip-size + 0.5rem});
         }
 
-        @include wider-than($phone-max) {
+        @include wider-than($tablet-max) {
             left: 0;
             top: 50%;
             transform: translate(calc(-100% - #{$tooltip-size + 0.5rem}), -50%);
@@ -209,13 +210,13 @@ $form-border-width: 0.1rem;
             transform-origin: center;
             width: $tooltip-size;
 
-            @include width-up-to($phone-max) {
+            @include width-up-to($tablet-max) {
                 left: calc(50%);
                 top: #{-$tooltip-size * 1.07};
                 transform: rotate(-135deg) translateY(-63%);
             }
 
-            @include wider-than($phone-max) {
+            @include wider-than($tablet-max) {
                 right: #{-$tooltip-size * 1.07};
                 top: 50%;
                 transform: rotate(-45deg) translateY(-63%);
@@ -269,22 +270,21 @@ $form-border-width: 0.1rem;
 
 %control-group {
     display: block;
-    height: $form-element-height;
+    min-height: $form-element-height;
     margin: 0;
     position: relative;
     width: 100%;
 
     %field-label,
     %invalid-message {
-        position: absolute;
-        top: 0;
-        transform: translateY(-104%);
         width: 100%;
     }
 
     %invalid-message {
         bottom: 0;
-        transform: translateY(100%);
+        margin-bottom: -2rem; // should be line height of text
+        position: relative;
+        transform: none;
     }
 }
 
