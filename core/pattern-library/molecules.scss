@@ -190,7 +190,7 @@ $form-border-width: 0.1rem;
 
         @include width-up-to($tablet-max) {
             left: 0;
-            bottom: 100%;
+            bottom: calc(100% + 0.5rem);
             transform: translateY(#{$tooltip-size - 0.5rem});
         }
 
@@ -212,7 +212,7 @@ $form-border-width: 0.1rem;
             width: $tooltip-size;
 
             @include width-up-to($tablet-max) {
-                left: 4rem;
+                left: calc(50% - #{$tooltip-diagonal});
                 bottom: #{-$tooltip-size * 1.07};
                 transform: rotate(45deg) translateY(-63%);
             }
