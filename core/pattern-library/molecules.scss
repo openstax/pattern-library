@@ -148,7 +148,8 @@ $form-border-width: 0.1rem;
     }
 
     // Marking invalid items can be delayed
-    &:not(.delay-validation):invalid {
+    &:not(.delay-validation):invalid,
+    &:not(.delay-validation)%has-error {
         background-color: ui-color(error-bg);
         border: thin solid ui-color(error-border);
         color: text-color(error);
@@ -179,7 +180,7 @@ $form-border-width: 0.1rem;
 
     $tooltip-size: 1.5rem;
     $tooltip-diagonal: $tooltip-size * 0.707;
-    %active + %tooltip {
+    %active ~ %tooltip {
         background-color: ui-color(white);
         border: thin solid ui-color(form-border);
         border-radius: 0.2rem;
