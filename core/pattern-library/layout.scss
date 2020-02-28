@@ -120,6 +120,7 @@ $one-pixel-in-em: 1em * $scale-factor * 0.1;
     @include grid();
 
     background-color: ui-color(form-bg);
+    grid-auto-rows: min-content;
     grid-gap: 5rem 1rem;
     padding: 4rem;
 
