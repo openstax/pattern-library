@@ -148,7 +148,8 @@ $form-border-width: 0.1rem;
     }
 
     // Marking invalid items can be delayed
-    &:not(.delay-validation):invalid {
+    &:not(.delay-validation):invalid,
+    &:not(.delay-validation)%has-error {
         background-color: ui-color(error-bg);
         border: thin solid ui-color(error-border);
         color: text-color(error);
