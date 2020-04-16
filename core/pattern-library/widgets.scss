@@ -1,0 +1,63 @@
+%os-multiselect {
+    $box-background: rgb(231, 242, 246);
+    $box-border: rgb(84, 143, 185);
+    $box-gap: 1rem;
+
+    .btn {
+        @extend %button;
+    }
+
+    .selections,
+    .results,
+    .selections-and-filter {
+        align-items: center;
+        display: flex;
+        flex-flow: row wrap;
+        margin-left: -$box-gap;
+
+        .filter-toggle,
+        .filter-input {
+            margin-left: $box-gap;
+            margin-right: $box-gap;
+        }
+
+        .box,
+        .result {
+            border-radius: 0.2rem;
+            margin-bottom: #{$box-gap / 2};
+            margin-left: $box-gap;
+            margin-top: #{$box-gap / 2};
+            padding: 0.2rem 0.7rem;
+        }
+
+        .box {
+            background-color: $box-background;
+            border: thin solid $box-border;
+        }
+
+        .result {
+            border: thin solid ui-color(form-border);
+            cursor: pointer;
+        }
+    }
+
+    .selections-and-filter {
+        margin-bottom: $normal-margin;
+    }
+
+    .put-away,
+    .clear-filter {
+        cursor: pointer;
+        font-weight: bold;
+        margin-left: 1rem;
+        padding: 0.2rem;
+    }
+
+    .filter {
+        @include set-font(body-regular);
+
+        box-sizing: border-box;
+        height: 4rem;
+        padding: 0 1rem;
+    }
+}
