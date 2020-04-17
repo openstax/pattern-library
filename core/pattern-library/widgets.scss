@@ -15,8 +15,11 @@
         flex-flow: row wrap;
         margin-left: -$box-gap;
 
-        .filter-toggle,
-        .filter-input {
+        .filter-toggle > :last-child {
+            margin-left: $normal-margin;
+        }
+
+        .filter-button-or-input {
             margin-left: $box-gap;
             margin-right: $box-gap;
         }
