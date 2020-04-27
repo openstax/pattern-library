@@ -7,6 +7,7 @@
 @import 'elements/form-elements';
 @import 'elements/menus';
 @import 'elements/messages';
+@import 'elements/widgets';
 
 @each $name, $spec in $os-colors {
     #{".bg-" + $name} {
