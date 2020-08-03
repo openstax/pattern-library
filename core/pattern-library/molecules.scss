@@ -127,6 +127,8 @@ $form-border-width: 0.1rem;
     }
 }
 
+
+
 @mixin non-button-input() {
     @include set-font(body-regular);
     @include form-border();
@@ -287,6 +289,19 @@ $form-border-width: 0.1rem;
         margin-bottom: -2rem; // should be line height of text
         position: relative;
         transform: none;
+    }
+}
+
+%radio-control-group {
+    break-inside: avoid;
+
+    > label {
+        align-items: center;
+        display: flex;
+        [type="radio"],
+        [type="checkbox"] {
+            margin: 0.5rem 1rem 1rem 0;
+        }
     }
 }
 
