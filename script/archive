@@ -34,7 +34,7 @@ remote_dir="/var/www/repo/pattern-library/${GIT_COMMIT}/"
 latest_dir="/var/www/repo/pattern-library/latest/"
 local_styleguide_dir="./styleguide/"
 
-ssh -i ${key_path} ${remote_user}@${remote_host} "mkdir -p '${remote_dir}'" || exit 5
+ssh ${remote_user}@${remote_host} "mkdir -p '${remote_dir}'" || exit 5
 rsync -avp -e "ssh -l${remote_user}" ${local_styleguide_dir} ${remote_host}:${remote_dir} || exit 6
 
 if [[ "${GIT_BRANCH}" == "origin/master" ]]; then

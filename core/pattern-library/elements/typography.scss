@@ -23,19 +23,19 @@ h4 {
 // These should be @extend %text-h1, etc., but that causes SASS to duplicated
 // lots of stuff.
 h1 {
-    @include scaling-title-font(h3, h1);
+    @include scale-set-font(h3, h1);
 }
 
 .hero h1 {
-    @include scaling-title-font(h2, hero-h1);
+    @include scale-set-font(h2, hero-h1);
 }
 
 h2 {
-    @include scaling-title-font(h3, h2);
+    @include scale-set-font(h3, h2);
 }
 
 h3 {
-    @include scaling-title-font(h4, h3);
+    @include scale-set-font(h4, h3);
 }
 
 h4 {
