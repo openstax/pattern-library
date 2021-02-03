@@ -1,17 +1,6 @@
 #!/bin/bash
 
 echo "==> Initializing nvm"
-
-# Initialize nvm
-export NVM_DIR="$HOME/.nvm"
-if [[ -s "$NVM_DIR/nvm.sh" ]]; then
-  echo "nvm is already installed"
-else
-  echo "installing nvm"
-  curl -o- https://raw.githubusercontent.com/creationix/nvm/v0.33.1/install.sh | bash
-fi
-source "$NVM_DIR/nvm.sh" || exit 1  # This loads nvm
-
 echo "nvm: $(nvm --version)"
 
 if [[ -d "./script/" ]]; then
@@ -34,8 +23,9 @@ remote_dir="/var/www/repo/pattern-library/${GIT_COMMIT}/"
 latest_dir="/var/www/repo/pattern-library/latest/"
 local_styleguide_dir="./styleguide/"
 
+# shellcheck disable=SC2029
 ssh ${remote_user}@${remote_host} "mkdir -p '${remote_dir}'" || exit 5
-rsync -avp -e "ssh -l${remote_user}" ${local_styleguide_dir} ${remote_host}:${remote_dir} || exit 6
+rsync -avp -e "ssh -l${remote_user}" ${local_styleguide_dir} ${remote_host}:"${remote_dir}" || exit 6
 
 if [[ "${GIT_BRANCH}" == "origin/master" ]]; then
   rsync -avp -e "ssh -i -l${remote_user}" ${local_styleguide_dir} ${remote_host}:${latest_dir} || exit 6
