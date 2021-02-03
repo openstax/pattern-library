@@ -18,8 +18,8 @@ $text-colors: (
     footer-header: #9a9a9b,
     footer: #d5d5d5,
     helper: #6f6f6f,
-    link-hover: #026aa1,
-    link: #027eb5,
+    link-hover: #005481,
+    link: #026aa1,
     normal: #424242,
     white: #fff
 );
@@ -35,18 +35,23 @@ $ui-colors: (
     form-bg: #f1f1f1,
     form-border: #d5d5d5,
     page-bg: #f1f1f1,
-    primary-active: #df571e,
-    primary-hover: #e96128,
-    primary: map-get($os-colors, orange),
-    secondary-active: #818181,
-    secondary-hover: #8b8b8b,
-    secondary: #767676,
+    primary-active: #b03808,
+    primary-hover: #be3c08,
+    primary: #d4450c,
+    secondary-active: #4c4c4c,
+    secondary-hover: #646464,
+    secondary: #757575,
     success-bg: #d6f1f7,
     success-border: #0064a0,
     success-fg: #0064a0,
     white: #fff,
     black: #000
 );
+
+@mixin light-on-dark() {
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
 
 @function get-color($map, $key) {
     @if map-has-key($map, $key) {

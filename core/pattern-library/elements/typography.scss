@@ -23,26 +23,23 @@ h4 {
 // These should be @extend %text-h1, etc., but that causes SASS to duplicated
 // lots of stuff.
 h1 {
-    @extend %text-h1;
+    @include scale-set-font(h3, h1);
 }
 
 .hero h1 {
-    @extend %text-hero-h1;
+    @include scale-set-font(h2, hero-h1);
 }
 
 h2 {
-    @extend %text-h2;
-    margin-top: 2rem;
+    @include scale-set-font(h3, h2);
 }
 
 h3 {
-    @extend %text-h3;
-    margin-top: 1.5rem;
+    @include scale-set-font(h4, h3);
 }
 
 h4 {
     @extend %text-h4;
-    margin-top: 1rem;
 }
 
 .tutor {
