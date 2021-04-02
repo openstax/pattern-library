@@ -57,7 +57,7 @@ $ui-colors: (
     @if map-has-key($map, $key) {
         @return map-get($map, $key);
     }
-    @warn 'Unknown `#{$key}` in #{$map}';
+    @warn 'Unknown `#{$key}` in map';
     @return null;
 }
 
