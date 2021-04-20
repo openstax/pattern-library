@@ -17,15 +17,5 @@ jobs:
       -
         name: "Build pattern-library"
         run: ./script/build
-      -
-        name: Install SSH key
-        uses: shimataro/ssh-key-action@v2
-        with:
-          key: ${{ secrets.JENKINS_RUNDECK_ID_RSA }}
-          name: id_rsa
-          known_hosts: ${{ secrets.KNOWN_HOSTS }}
-      -
-        name: "Create archive for packages.cnx.org"
-        run: ./script/archive
 name: build
 on: push
