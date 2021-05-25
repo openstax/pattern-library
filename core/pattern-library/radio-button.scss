@@ -14,8 +14,8 @@ $custom-radio-disabled-pip-color:   transparentize(os-color(light-blue), 0.40);
 @if ($custom-radio-size % 2 == 1) { @error '$custom-radio-size must be even'; }
 // round to nearest even number
 @if ($custom-radio-pip-size % 2 == 1) { $custom-radio-pip-size: $custom-radio-pip-size - 1; }
-%radiobutton,
-[type="radio"] {
+
+@mixin radio-button() {
     -webkit-appearance: none;
     border-radius: 100%;
     border-width: 0;
