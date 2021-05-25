@@ -1,6 +1,6 @@
 Gem::Specification.new do |spec|
   spec.name          = "pattern-library"
-  spec.version       = "1.2.1"
+  spec.version       = "1.3.0"
   spec.authors       = ["Roy Johnson"]
   spec.email         = ["roy.e.johnson@rice.edu"]
 

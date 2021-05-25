@@ -43,6 +43,10 @@ button,
     @extend %radio-control-group;
 }
 
+[type="radio"] {
+    @include radio-button();
+}
+
 // Form
 //
 // Forms get a slightly different background color and a healthy bit of padding to
