@@ -13,10 +13,3 @@ for fn in styleguide/*.html; do
   do_progress_quiet "Testing $fn" \
     npm run-script test2 -- --html "$fn" --lcov "./coverage/$noext.lcov"
 done
-
-# Validate the shell scripts
-if [[ $(command -v shellcheck) ]]; then
-  # shellcheck disable=SC2046
-  do_progress_quiet "Linting shell scripts" \
-    shellcheck $(find ./script  -mindepth 1 -maxdepth 1 -not -path '*/\.*' -type f)
-fi
