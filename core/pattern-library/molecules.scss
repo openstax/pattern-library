@@ -4,7 +4,34 @@ $form-border-width: 0.1rem;
     border: $form-border-width solid ui-color(form-border);
 }
 
+// The focus visual only — no selector. Apply it under whatever trigger you need
+// (`&:focus`, `&:focus-within`, `&:focus-visible`, …).
+@mixin focus-style() {
+    box-shadow: 0 0 0.5rem 0.3rem rgba(ui-color(focus-outline), 0.7);
+    outline: none;
+}
+
+// The common case: the focus visual on the element's own focus.
+@mixin focus-indicator() {
+    &:focus {
+        @include focus-style();
+    }
+}
+
+// Strips a native <button> to a bare, interactive, focusable control. Used
+// standalone for custom buttons that bring their own appearance, and composed
+// into button-basic() below so every branded button inherits it.
+@mixin button-reset() {
+    appearance: none;
+    background: transparent;
+    border: 0;
+    cursor: pointer;
+    touch-action: manipulation;
+    @include focus-indicator();
+}
+
 @mixin button-basic() {
+    @include button-reset();
     @include center();
     @include set-font(body-regular);
 
@@ -12,7 +39,6 @@ $form-border-width: 0.1rem;
     border-radius: 0.5rem;
     box-shadow: 0 0.2rem 0.4rem rgba(ui-color(black), 0.2);
     box-sizing: border-box;
-    cursor: pointer;
     display: inline-flex;
     height: $form-element-height;
     margin: 0;
@@ -149,9 +175,8 @@ $form-border-width: 0.1rem;
     width: 100%;
 
     &:focus {
-        border: thin solid os-color(light-blue);
-        box-shadow: 0 0 0.4rem 0 rgba(os-color(light-blue), 0.5);
-        outline: none;
+        @include focus-style();
+        border-color: ui-color(focus-outline);
     }
 
     &::placeholder {
