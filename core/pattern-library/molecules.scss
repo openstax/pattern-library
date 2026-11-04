@@ -18,6 +18,17 @@ $form-border-width: 0.1rem;
     }
 }
 
+// A solid, offset focus ring for keyboard focus (WCAG 1.4.11, 3:1 against the page).
+// The glow from focus-style() is cleared because it tints the area next to the
+// ring and drops its contrast below 3:1. Use for controls with no border of their own.
+@mixin focus-outline() {
+    &:focus-visible {
+        box-shadow: none;
+        outline: 0.3rem solid ui-color(focus-outline);
+        outline-offset: 0.2rem;
+    }
+}
+
 // Strips a native <button> to a bare, interactive, focusable control. Used
 // standalone for custom buttons that bring their own appearance, and composed
 // into button-basic() below so every branded button inherits it.
@@ -28,6 +39,7 @@ $form-border-width: 0.1rem;
     cursor: pointer;
     touch-action: manipulation;
     @include focus-indicator();
+    @include focus-outline();
 }
 
 @mixin button-basic() {
